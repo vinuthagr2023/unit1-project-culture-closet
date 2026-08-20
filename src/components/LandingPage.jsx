@@ -1,23 +1,24 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import dress11 from '../images/kids-dress-image11.jpg';
 import dress22 from '../images/kids-dress-imame22.jpg';
 import dress4 from '../images/kids-dress-image4.jpg';
 import dress6 from '../images/kids-dress-image6.jpg';
 import DressCard from "./DressCard";
 import dressList from "../data/mockData";
+import DonorLogin from "./DonorLogin";
+import UserLogin from "./UserLogin";
 
 
 function LandingPage() {
 
     const [dresses, setDresses] = useState(dressList);
 
-    const [selectedValue, setSelectedValue]= useState("");
+    const [selectedValue, setSelectedValue] = useState(false);
 
-    const handleChange=(event)=>{
-        setSelectedValue(event.target.value);
-    }
     return (
         <div className="landingPage">
+             <h1> Culture Closet </h1>
             <div className="logo">Heritage kids</div>
             <header>
                 <nav className="nav-links">
@@ -27,18 +28,23 @@ function LandingPage() {
                 </nav>
             </header>
 
-            <div className="options">
-                <label htmlFor="select-option">Login Options</label>
-                <select id="select-option"
-                        value={selectedValue}
-                        onChange={handleChange}
-                        >
-                        <option value="" disabled>-- Choose Login --</option>
-                        <option value="donolLogin">Donor Login</option>
-                        <option value="userlogin">User login</option>
-                        </select>
+            <div className="dropDownOptions">
+
+                <button className="dropdown"
+                    onClick={() => setSelectedValue(selectedValue)}
+                >Login Option</button>
+                {!selectedValue &&
+                    <div className="dropDownMenu">
+                        <Link to="/donor-login" className="dropdown-item">
+                            Donor Login
+                        </Link>
+                        <Link to="/user-login" className="dropdown-item">
+                            User Login
+                        </Link>
+                    </div>}
+
             </div>
-            
+
             <section>
                 <div className="slogan">
                     <h2>Share your heritage</h2>
