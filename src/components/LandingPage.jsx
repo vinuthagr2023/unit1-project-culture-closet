@@ -8,7 +8,14 @@ import dressList from "../data/mockData";
 
 
 function LandingPage() {
+
     const [dresses, setDresses] = useState(dressList);
+
+    const [selectedValue, setSelectedValue]= useState("");
+
+    const handleChange=(event)=>{
+        setSelectedValue(event.target.value);
+    }
     return (
         <div className="landingPage">
             <div className="logo">Heritage kids</div>
@@ -20,6 +27,18 @@ function LandingPage() {
                 </nav>
             </header>
 
+            <div className="options">
+                <label htmlFor="select-option">Login Options</label>
+                <select id="select-option"
+                        value={selectedValue}
+                        onChange={handleChange}
+                        >
+                        <option value="" disabled>-- Choose Login --</option>
+                        <option value="donolLogin">Donor Login</option>
+                        <option value="userlogin">User login</option>
+                        </select>
+            </div>
+            
             <section>
                 <div className="slogan">
                     <h2>Share your heritage</h2>
