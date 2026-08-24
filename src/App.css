@@ -1,0 +1,30 @@
+.title{
+    background-color: rgb(245, 241, 44);
+ border: 5px;
+ border-radius: 8px;
+ padding: 20px;
+ margin: 0%;
+ color: green;
+ font-size: 50px;
+}
+
+.nav{
+    display: flex;
+  justify-content:center;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  padding: 8px 30px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}
+
+
+.dropdown{
+   width: fit-content;     
+  margin-left:auto;
+  
+    
+}
+
+

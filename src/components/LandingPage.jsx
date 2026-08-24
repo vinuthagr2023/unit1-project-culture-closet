@@ -5,39 +5,33 @@ import dress22 from '../images/kids-dress-imame22.jpg';
 import dress4 from '../images/kids-dress-image4.jpg';
 import dress6 from '../images/kids-dress-image6.jpg';
 import DressCard from "./DressCard";
-import dressList from "../data/mockData";
+import initialDressList from "../data/mockData";
 import DonorLogin from "./DonorLogin";
 import UserLogin from "./UserLogin";
+import RecentDresses from "./RecentDresses";
 
 
 function LandingPage() {
+    
+    const [dresses, setDresses] = useState(initialDressList);
 
-    const [dresses, setDresses] = useState(dressList);
-
-    const [selectedValue, setSelectedValue] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="landingPage">
-             <h1> Culture Closet </h1>
-            <div className="logo">Heritage kids</div>
-            <header>
-                <nav className="nav-links">
-                    <a href="#home">Home</a><br></br>
-                    <a href="#notification">notification</a><br></br>
-                    <a href="#profile">Profile</a>
-                </nav>
-            </header>
-
-            <div className="dropDownOptions">
-
+        <div>
+             <div className="recentItem">
+                <Link to="/recent-dresses" className="recent-item">Recent Dresses</Link>
+            </div>
+            <div className="Categery">
                 <button className="dropdown"
-                    onClick={() => setSelectedValue(selectedValue)}
-                >Login Option</button>
-                {!selectedValue &&
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    Login Option {isOpen ? '▲' : '▼'}</button>
+                {!isOpen &&
                     <div className="dropDownMenu">
                         <Link to="/donor-login" className="dropdown-item">
                             Donor Login
-                        </Link>
+                        </Link><br></br>
                         <Link to="/user-login" className="dropdown-item">
                             User Login
                         </Link>
@@ -59,25 +53,13 @@ function LandingPage() {
                 </div><br></br>
 
                 <div className="categery_buttons">
-                    <button className="donate">Donate dresses</button>
+                    <button type="click" className="donate">Donate dresses</button>
                     <button className="find">Find dresses</button>
                 </div>
             </section>
+         
 
 
-            <section className="recentItem">
-                <h3>Receently added items</h3>
-                <div className="previewGrid">
-                    {dresses.map((item) => (
-                        <DressCard key={item.id} dress={item} />
-                    ))}
-                </div>
-            </section>
-
-            <footer className="footer">
-                <p>---------Spread tradition to others-------------</p>
-
-            </footer>
         </div>
 
     );
