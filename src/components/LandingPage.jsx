@@ -11,12 +11,13 @@ import UserLogin from "./UserLogin";
 import RecentDresses from "./RecentDresses";
 
 
-function LandingPage() {
+function LandingPage({isLoggedIn}) {
     
     const [dresses, setDresses] = useState(initialDressList);
 
     const [isOpen, setIsOpen] = useState(false);
 
+  
     return (
         <div>
              <div className="recentItem">
@@ -53,8 +54,12 @@ function LandingPage() {
                 </div><br></br>
 
                 <div className="categery_buttons">
-                    <button type="click" className="donate">Donate dresses</button>
+                    <Link to={isLoggedIn ? "/add-dress" : "/donor-login"}>
+                    <button type="click" className="donate"> Donate dresses</button>
+                    </Link>
+                    <Link to="/browse-dresses">
                     <button className="find">Find dresses</button>
+                    </Link>
                 </div>
             </section>
          

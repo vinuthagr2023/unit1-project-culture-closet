@@ -12,10 +12,12 @@ import initialDressList from './data/mockData'
 
 
 function App() {
-  const [dressList,setDressList]=useState(initialDressList);
+  const [dressList, setDressList] = useState(initialDressList);
   const handleAddDress = (newDress) => {
     setDressList((prevList) => [newDress, ...prevList]);
   };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <div className='app-container'>
       <header className='main-header'>
@@ -31,7 +33,7 @@ function App() {
 
       <main>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path='/recent-dresses' element={<RecentDresses dresses={dressList}/>}/>
           <Route path="/donor-login" element={<DonorLogin />} />

@@ -11,7 +11,7 @@ function BrowseDresses({ dresses }) {
             dress.traditionStyle.toLowerCase().includes(searchTerm.toLowerCase());
 
         const matchesGender =
-            selectedGender === "all" || dress.gender.toLowerCase() === selectedGender.toLowerCase();
+            selectedGender === "all" || dress.gender.toLowerCase === selectedGender.toLowerCase();
         return matchesSearch && matchesGender;
     });
 
