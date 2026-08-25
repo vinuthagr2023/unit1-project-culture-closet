@@ -12,12 +12,24 @@ import initialDressList from './data/mockData'
 
 
 function App() {
-  const [dressList, setDressList] = useState(initialDressList);
+  const [dressList, setDressList] = useState([]);
+
+  const[user,setUser]=useState(null); // tracks login username
+
+  // Derived state: automatically true if user exists, false if user is null
+  const isLoggedIn = !!user;
+ 
+  const handleLogin = (username)=>{
+    setUser(username);
+  };
+
+  const handleLogout = ()=>{
+    setUser(null);
+  };
   const handleAddDress = (newDress) => {
     setDressList((prevList) => [newDress, ...prevList]);
   };
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  
   return (
     <div className='app-container'>
       <header className='main-header'>
@@ -30,13 +42,21 @@ function App() {
         </div>
       </header>
 
+    <div>
+      {isLoggedIn &&(
+        <div>
+          <span>Welcome,<strong>{user}</strong>!</span>
+          <button onClick={handleLogout} >Logout</button>
+        </div>
+      )}
+    </div>
 
       <main>
         <Routes>
-          <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} />} />
+          <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} username ={user} />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path='/recent-dresses' element={<RecentDresses dresses={dressList}/>}/>
-          <Route path="/donor-login" element={<DonorLogin />} />
+          <Route path="/donor-login" element={<DonorLogin onLogin={handleLogin} />} />
           <Route path="/user-login" element={<UserLogin />} />
           <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress}/>} />
           <Route path="/browse-dresses" element = {<BrowseDresses dresses = {dressList}/>}/>

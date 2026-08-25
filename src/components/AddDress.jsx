@@ -1,8 +1,11 @@
 import { useState } from "react";
 
-function AddDress({onAddDress}) {
+function AddDress({ onAddDress }) {
     const [showForm, setShowForm] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
+
+    const [addedDresses, setAddedDresses] = useState([]);
+
     const [formData, setFormData] = useState({
         itemName: '',
         traditionStyle: '',
@@ -20,22 +23,25 @@ function AddDress({onAddDress}) {
         }));
     };
 
-    const handleShowForm = ()=>{
+    const handleShowForm = () => {
         setShowForm(true);
         setSuccessMessage("");
+        setLastAddedDress(null);
 
     };
     const handleSubmit = (e) => {
         e.preventDefault();
         if (typeof onAddDress !== "function") {
-      console.error("onAddDress prop was not passed correctly to AddDress component.");
-      return;
-    }
+            console.error("onAddDress prop was not passed correctly to AddDress component.");
+            return;
+        }
         const newDress = {
             ...formData,
             id: Date.now(), // Generate unique ID
         };
         onAddDress(newDress);
+
+        setAddedDresses((prevDresses) => [newDress, ...prevDresses]);
         console.log('New dress submitted:', newDress);
         setSuccessMessage('Dress added successfully!');
         setFormData({
@@ -43,7 +49,7 @@ function AddDress({onAddDress}) {
             traditionStyle: "",
             gender: "",
             age: "",
-            size:"",
+            size: "",
             condition: ''
         });
 
@@ -51,14 +57,15 @@ function AddDress({onAddDress}) {
     }
 
     return (
-        <div>
+        <div className="add-dress-container">
             <h2> Donor Portal</h2>
             {successMessage && (
                 <p style={{ color: "green", fontWeight: "bold" }}>{successMessage}</p>
             )}
+
             {!showForm && (
                 <button onClick={handleShowForm} className="add-btn">
-                    Add a Dress
+                    {addedDresses.length>0 ? "Add another dress" : "Add a Dress"}
                 </button>
             )}
 
@@ -92,7 +99,7 @@ function AddDress({onAddDress}) {
                         <input type="text" name="condition" value={formData.condition} onChange={handleChange}
                             required /><br />
                     </label>
-                    
+
                     <button type="submit">Submit Dress</button>
                     <button type="button" onClick={() => setShowForm(false)}>
                         Cancel
@@ -100,9 +107,26 @@ function AddDress({onAddDress}) {
                 </form>
 
             )}
-
-        </div>
-    )
+            {addedDresses.length > 0 && (
+                <div>
+                <h3>Your Added Dresses ({addedDresses.length})</h3>
+                {addedDresses.map((dress) => (
+                    <div
+                        key={dress.id}>
+                        <p><strong>ID:</strong> {dress.id}</p>
+                        <p><strong>Name:</strong> {dress.itemName}</p>
+                        <p><strong>Style:</strong>{dress.traditionStyle}</p>
+                        <p><strong>Gender:</strong>{dress.gender}</p>
+                        <p><strong>Age:</strong>{dress.age}</p>
+                        <p><strong>Size:</strong>{dress.size}</p>
+                        </div>
+            
+                ))}
+                </div>
+            
+            )}
+         </div>
+         );
 }
 
 export default AddDress;
