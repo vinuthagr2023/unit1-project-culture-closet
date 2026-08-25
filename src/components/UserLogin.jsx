@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import BrowseDresses from "./BrowseDresses";
 
 function UserLogin(){
-     const [formData, setFormData] = useState({
+    const [usernameInput,setUsernameInput] = useState("");
+    const [formData, setFormData] = useState({
         name: "",
         email: "",
     });
@@ -15,22 +17,37 @@ function UserLogin(){
         }));
     };
 
-   const handleLoginClick=(e)=>{
-        if(!formData.name || !formData.email){
-            e.preventDefault();
-            alert("Please fill out both Name and Email!");
+    const handleLoginClick=(e)=>{
+        const name = formData.name?formData.name.trim():"";
+        const email = formData.email?formData.email.trim():"";
+
+        if(!name || !email){
+            if(e&& typeof e.preventDefault==="function"){
+                 e.preventDefault();
+            }
+           alert("Please fill out both Name and Email!");
+            return;
+        }
+        // Pass validated name to parent state
+        if(typeof onLogin==="function"){
+            onLogin(name); // Pass username to App.jsx state
         }
     };
 
+
     return (
-        <div>
+        <div className="login-container">
             <h2> User Login </h2>
-            <form onSubmit={handleLoginClick}>
-                <label> Name:
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} />
+            <form onSubmit={(e)=>e.preventDefault()}>
+                <label> Usename:
+                    <input type="text" name="name" value={formData.name} onChange={handleChange}
+                    placeholder="Enter your name"
+                    required />
                 </label><br />
                 <label> Email:
-                    <input type="email" name="email" value={formData.email} onChange={handleChange}/>
+                    <input type="email" name="email" value={formData.email} onChange={handleChange}
+                     placeholder="Enter your email"
+                    required/>
                 </label><br/>
           
                 <Link to="/browse-dresses" onClick={handleLoginClick} className="Ulogin-button">

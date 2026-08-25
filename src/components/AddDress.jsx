@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import LandingPage from "./LandingPage";
+import dress11 from '../images/kids-dress-image11.jpg';
 
-function AddDress({ onAddDress }) {
+function AddDress({ onAddDress, user }) {
     const [showForm, setShowForm] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
-
+    const [loginWarning, setLoginWarning] = useState("");
     const [addedDresses, setAddedDresses] = useState([]);
 
     const [formData, setFormData] = useState({
@@ -13,7 +16,18 @@ function AddDress({ onAddDress }) {
         age: '',
         size: '',
         condition: '',
+        imageUrl: ""
     });
+
+    // Clear all local states when the user logs out
+    useEffect(() => {
+        if (!user) {
+            setAddedDresses([]);
+            setSuccessMessage("");
+            setLoginWarning("");
+            setShowForm(false);
+        }
+    }, [user]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,6 +38,11 @@ function AddDress({ onAddDress }) {
     };
 
     const handleShowForm = () => {
+        if (!user) {
+            setLoginWarning("Please login to add a dress!");
+            return;
+        }
+        setLoginWarning("");
         setShowForm(true);
         setSuccessMessage("");
         setLastAddedDress(null);
@@ -50,7 +69,8 @@ function AddDress({ onAddDress }) {
             gender: "",
             age: "",
             size: "",
-            condition: ''
+            condition: '',
+            imageUrl: "",
         });
 
         setShowForm(false);
@@ -59,13 +79,18 @@ function AddDress({ onAddDress }) {
     return (
         <div className="add-dress-container">
             <h2> Donor Portal</h2>
+            {loginWarning && (
+                <p>{loginWarning}
+                    <Link to="/donor-login">Click here to Login</Link>
+                </p>
+            )}
             {successMessage && (
                 <p style={{ color: "green", fontWeight: "bold" }}>{successMessage}</p>
             )}
 
             {!showForm && (
                 <button onClick={handleShowForm} className="add-btn">
-                    {addedDresses.length>0 ? "Add another dress" : "Add a Dress"}
+                    {addedDresses.length > 0 ? "Add another dress" : "Add a Dress"}
                 </button>
             )}
 
@@ -99,6 +124,11 @@ function AddDress({ onAddDress }) {
                         <input type="text" name="condition" value={formData.condition} onChange={handleChange}
                             required /><br />
                     </label>
+                    <label>Photo:
+                        <input type="url" name="imageUrl" value={formData.imageUrl} onChange={handleChange}
+                        />
+
+                    </label>
 
                     <button type="submit">Submit Dress</button>
                     <button type="button" onClick={() => setShowForm(false)}>
@@ -109,24 +139,27 @@ function AddDress({ onAddDress }) {
             )}
             {addedDresses.length > 0 && (
                 <div>
-                <h3>Your Added Dresses ({addedDresses.length})</h3>
-                {addedDresses.map((dress) => (
-                    <div
-                        key={dress.id}>
-                        <p><strong>ID:</strong> {dress.id}</p>
-                        <p><strong>Name:</strong> {dress.itemName}</p>
-                        <p><strong>Style:</strong>{dress.traditionStyle}</p>
-                        <p><strong>Gender:</strong>{dress.gender}</p>
-                        <p><strong>Age:</strong>{dress.age}</p>
-                        <p><strong>Size:</strong>{dress.size}</p>
+                    <h3>Your Added Dresses ({addedDresses.length})</h3>
+                    {addedDresses.map((dress) => (
+                        <div
+                            key={dress.id}>
+                            {dress.imageUrl && (<img src={dress.imageUrl} alt={dress.itemName} />)}
+
+                            <p><strong>ID:</strong> {dress.id}</p>
+                            <p><strong>Name:</strong> {dress.itemName}</p>
+                            <p><strong>Style:</strong>{dress.traditionStyle}</p>
+                            <p><strong>Gender:</strong>{dress.gender}</p>
+                            <p><strong>Age:</strong>{dress.age}</p>
+                            <p><strong>Size:</strong>{dress.size}</p>
+
                         </div>
-            
-                ))}
+
+                    ))}
                 </div>
-            
+
             )}
-         </div>
-         );
+        </div>
+    );
 }
 
 export default AddDress;

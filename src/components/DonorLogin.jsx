@@ -18,13 +18,19 @@ function DonorLogin({onLogin}) {
     };
 
     const handleLoginClick=(e)=>{
-        if(!formData.userName.trim() || !formData.email.trim()){
-            e.preventDefault();
-            alert("Please fill out both Name and Email!");
+        const name = formData.name?formData.name.trim():"";
+        const email = formData.email?formData.email.trim():"";
+
+        if(!name || !email){
+            if(e&& typeof e.preventDefault==="function"){
+                 e.preventDefault();
+            }
+           alert("Please fill out both Name and Email!");
             return;
         }
+        // Pass validated name to parent state
         if(typeof onLogin==="function"){
-            onLogin(formData.userName.trim()); // Pass username to App.jsx state
+            onLogin(name); // Pass username to App.jsx state
         }
     };
 
@@ -34,7 +40,7 @@ function DonorLogin({onLogin}) {
             <h2> Donor Login </h2>
             <form onSubmit={(e)=>e.preventDefault()}>
                 <label> Usename:
-                    <input type="text" name="userName" value={formData.userName} onChange={handleChange}
+                    <input type="text" name="name" value={formData.name} onChange={handleChange}
                     placeholder="Enter your name"
                     required />
                 </label><br />

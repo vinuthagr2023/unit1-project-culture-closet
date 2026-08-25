@@ -57,8 +57,8 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path='/recent-dresses' element={<RecentDresses dresses={dressList}/>}/>
           <Route path="/donor-login" element={<DonorLogin onLogin={handleLogin} />} />
-          <Route path="/user-login" element={<UserLogin />} />
-          <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress}/>} />
+          <Route path="/user-login" element={<UserLogin onAddDress={handleAddDress} user={user}/>} />
+          <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user}/>} />
           <Route path="/browse-dresses" element = {<BrowseDresses dresses = {dressList}/>}/>
         </Routes>
       </main>
