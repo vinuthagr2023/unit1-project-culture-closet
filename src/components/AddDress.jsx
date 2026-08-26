@@ -113,7 +113,7 @@ function AddDress({ onAddDress, user }) {
                         </select><br />
                     </label>
                     <label>Age:
-                        <input type="number" name="age" value={formData.age} onChange={handleChange}
+                        <input type="text" name="age" value={formData.age} onChange={handleChange}
                             required /><br />
                     </label>
                     <label>Size:
@@ -125,7 +125,17 @@ function AddDress({ onAddDress, user }) {
                             required /><br />
                     </label>
                     <label>Photo:
-                        <input type="url" name="imageUrl" value={formData.imageUrl} onChange={handleChange}
+                        <input type="file" name="image/*" onChange={(e) => {
+                            const file = e.target.files[0];
+                            if (file) {
+                                // Converts local computer file into a viewable browser URL
+                                const localImageUrl = URL.createObjectURL(file);
+                                setFormData((prev) => ({
+                                    ...prev,
+                                    imageUrl: localImageUrl,
+                                }));
+                            }
+                        }}
                         />
 
                     </label>

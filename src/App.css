@@ -7,6 +7,10 @@
  color: green;
  font-size: 50px;
 }
+.logo{
+  color: red;
+  font-size: 20px;
+}
 
 .nav{
     display: flex;
@@ -20,11 +24,45 @@
 }
 
 
-.dropdown{
-   width: fit-content;     
-  margin-left:auto;
-  
-    
+
+
+.recentItem{
+   display: flex;
+  justify-content:center;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  padding: 8px 30px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
 }
 
+.dropDownMenu,.dropdown{
+   display: flex;
+  justify-content:end;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  padding: 8px 30px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}
+.donate{
+  background-color: pink;
+ border: 5px;
+ border-radius: 5px;
+ padding: 10px;
+ margin: 0%;
+ color: green;
+ font-size: 30px;
 
+}
+.find{
+ background-color: pink;
+ border: 5px;
+ border-radius: 5px;
+ padding: 10px;
+ margin: 0%;
+ color: red;
+ font-size: 30px;
+}

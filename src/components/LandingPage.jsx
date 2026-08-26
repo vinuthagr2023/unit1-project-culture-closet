@@ -43,24 +43,30 @@ function LandingPage({isLoggedIn}) {
             <section>
                 <div className="slogan">
                     <h2>Share your heritage</h2>
-                    <p>Connect families to pass down and share traditional children cloths</p>
+                   
                 </div>
 
-                <div className="images">
-                    <img src={dress11} />
-                    <img src={dress22} />
-                    <img src={dress4} />
-                    <img src={dress6} />
-                </div><br></br>
 
                 <div className="categery_buttons">
                     <Link to={isLoggedIn ? "/add-dress" : "/donor-login"}>
                     <button type="click" className="donate"> Donate dresses</button>
                     </Link>
                     <Link to="/browse-dresses">
-                    <button className="find">Find dresses</button>
+                    <button type ="click" className="find"> Find dresses</button>
                     </Link>
+                </div><br></br>
+
+                <div>
+                     <p>Connect families to pass down and share traditional children cloths</p><br/>
                 </div>
+
+                
+                <div className="images">
+                    <img src={dress11} />
+                    <img src={dress22} />
+                    <img src={dress4} />
+                    <img src={dress6} />
+                </div><br></br>
             </section>
          
 
