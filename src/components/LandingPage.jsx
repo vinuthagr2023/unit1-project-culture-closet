@@ -4,6 +4,8 @@ import dress11 from '../images/kids-dress-image11.jpg';
 import dress22 from '../images/kids-dress-imame22.jpg';
 import dress4 from '../images/kids-dress-image4.jpg';
 import dress6 from '../images/kids-dress-image6.jpg';
+import closetImage1 from "../images/culture_closet1.jpg";
+import closetImage2 from "../images/culture_closet2.jpg";
 import DressCard from "./DressCard";
 import initialDressList from "../data/mockData";
 import DonorLogin from "./DonorLogin";
@@ -62,10 +64,10 @@ function LandingPage({isLoggedIn}) {
 
                 
                 <div className="images">
+                    <img src={closetImage1}/> 
                     <img src={dress11} />
-                    <img src={dress22} />
-                    <img src={dress4} />
-                    <img src={dress6} />
+                    <img src={closetImage2}/> 
+                   
                 </div><br></br>
             </section>
          
