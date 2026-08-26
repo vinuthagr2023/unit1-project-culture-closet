@@ -53,8 +53,8 @@ function LandingPage({isLoggedIn}) {
                     <Link to={isLoggedIn ? "/add-dress" : "/donor-login"}>
                     <button type="click" className="donate"> Donate dresses</button>
                     </Link>
-                    <Link to="/browse-dresses">
-                    <button type ="click" className="find"> Find dresses</button>
+                    <Link to={isLoggedIn ? "/add-dress" : "/user-login"}>
+                    <button type ="click" className="find"> Find and Get dresses</button>
                     </Link>
                 </div><br></br>
 
