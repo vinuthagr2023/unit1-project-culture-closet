@@ -24,11 +24,11 @@ function App() {
 
   const handleLogin = (username) => {
     setUser(username);
-    setRequestedDresses([]);
-  };
+   };
 
   const handleLogout = () => {
     setUser(null);
+     setRequestedDresses([]);
   };
   const handleAddDress = (newDress) => {
     setDressList((prevList) => [newDress, ...prevList]);
