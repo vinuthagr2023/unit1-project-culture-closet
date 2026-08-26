@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import {Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import LandingPage from './components/LandingPage'
 import DonorLogin from './components/DonorLogin'
@@ -9,12 +9,14 @@ import RecentDresses from './components/RecentDresses'
 import AddDress from './components/AddDress'
 import BrowseDresses from './components/BrowseDresses'
 import initialDressList from './data/mockData'
+import Header from './components/Header'
+
 
 
 function App() {
   const [dressList, setDressList] = useState(initialDressList);
-
-  const[user,setUser]=useState(null); // tracks login username
+  const[user,setUser]=useState(null); // tracks logged in username
+  const [requestedDresses,setRequestedDresses]=useState([]);
 
   // Derived state: automatically true if user exists, false if user is null
   const isLoggedIn = !!user;
@@ -29,35 +31,18 @@ function App() {
   const handleAddDress = (newDress) => {
     setDressList((prevList) => [newDress, ...prevList]);
   };
-
-  const [requestedDresses, setRequestedDresses] = useState([]);
   //Handler function to append new requests
-  const handleRequestDress = (requestedDress) => {
-    setRequestedDresses((prevRequests) => [...prevRequests, requestedDress]);
-  };
+  const handleRequestDress = (requestedDresses)=>{
+    setRequestedDresses((prevRequests)=>[...prevRequests,requestedDresses]);
+  }
   
   return (
     <div className='app-container'>
-      <header className='main-header'>
-      <h1 className='title'>Culture Closet </h1>
-        <div className='logo'>Heritage kids </div>
-        <div className='nav'>
-        <Link to="/">Home</Link>
-        <Link to="/about"> About </Link>
-        <Link to="#">Notifications </Link>
-        </div>
-      </header>
+      <Header isLoggedIn={isLoggedIn} 
+        user={user} 
+        onLogout={handleLogout}/>
 
-    <div>
-      {isLoggedIn &&(
-        <div>
-          <span>Welcome,<strong>{user}</strong>!</span>
-          <button onClick={handleLogout} >Logout</button>
-        </div>
-      )}
-    </div>
-
-      <main>
+       <main>
         <Routes>
           <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} username ={user} />} />
           <Route path="/about" element={<AboutPage />} />
@@ -65,7 +50,8 @@ function App() {
           <Route path="/donor-login" element={<DonorLogin onLogin={handleLogin} />} />
           <Route path="/user-login" element={<UserLogin onLogin={handleLogin} user={user} />} />
           <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user}/>} />
-          <Route path="/browse-dresses" element = {<BrowseDresses dresses = {dressList} user = {user}
+          <Route path="/browse-dresses"
+           element = {<BrowseDresses dresses = {dressList} user = {user}
           onRequestDress={handleRequestDress}
           />}/>
         </Routes>
