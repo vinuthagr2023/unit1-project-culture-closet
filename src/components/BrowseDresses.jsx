@@ -1,31 +1,42 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function BrowseDresses({ dresses = [], onRequestDress, user }) {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGender, setSelectedGender] = useState("all");
     const [selectedAge, setSelectedAge] = useState("all");
+    const [loginWarning, setLoginWarning] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+
+    // Automatically clear warning whenever user logs in
+    useEffect(() => {
+        if (user) {
+            setLoginWarning("");
+        }
+    }, [user]);
 
     const handleRequestClick = (dress) => {
         // Optional check: ensure user is logged in
         if (!user) {
-            alert("Please login first to request a dress!");
+            setSuccessMessage("");
+            setLoginWarning("Please log in first to request a dress!");
             return;
         }
+        setLoginWarning("");
 
         // Call parent handler if passed
         if (typeof onRequestDress === "function") {
             onRequestDress(dress);
         }
 
-        alert(`Request sent for: ${dress.itemName || dress.name || "this dress"}`);
+        setSuccessMessage(`Request sent for: ${dress.itemName || dress.name || "this dress"}`);
     };
 
-   // Safely guard against non-array values
-  const safeDresses = Array.isArray(dresses) ? dresses : [];
 
-  const filteredDresses = safeDresses.filter((dress) => {
-    if (!dress) return false;
+    const safeDresses = Array.isArray(dresses) ? dresses : [];
+
+    const filteredDresses = safeDresses.filter((dress) => {
+        if (!dress) return false;
         const name = dress.itemName ? dress.itemName.toLowerCase() : "";
         const style = dress.traditionStyle ? dress.traditionStyle.toLowerCase() : "";
         const gender = dress.gender ? dress.gender.toLowerCase() : "";
@@ -34,10 +45,8 @@ function BrowseDresses({ dresses = [], onRequestDress, user }) {
 
         // Text search matches Name, Style, or Age string
         const matchesSearch = name.includes(search) || style.includes(search);
-
         // Gender dropdown match
         const matchesGender = selectedGender === "all" || gender === selectedGender.toLowerCase();
-
         //Age Match
         const matchesAge = selectedAge === "all" || age === selectedAge.toLowerCase();
 
@@ -47,7 +56,28 @@ function BrowseDresses({ dresses = [], onRequestDress, user }) {
     return (
         <div>
             <h2> Browse Cultural outfits </h2>
-            <div>
+            {/* Render Login Warning Banner */}
+            {!user && loginWarning && (
+                <div className="warning-banner" >
+                    <span>{loginWarning} </span>
+                    <Link
+                        to="/user-login"
+                        style={{ fontWeight: "bold", color: "#721c24", textDecoration: "underline" }}
+                    >
+                        Click here for User Login
+                    </Link>
+                </div>
+            )}
+
+            {/* Render Success Notification Banner */}
+            {successMessage && (
+                <div className="success-banner">
+                    {successMessage}
+                </div>
+            )}
+
+            {/* Filter Section */}
+            <div className="filter-controls">
                 <input
                     type="text"
                     placeholder="Search by name, stylee..."
@@ -89,7 +119,12 @@ function BrowseDresses({ dresses = [], onRequestDress, user }) {
                             <p> <strong>Age:</strong>{dress.age}</p>
                             <p> <strong>Size:</strong>{dress.size}</p>
                             <p> <strong>Condition:</strong>{dress.condition}</p>
-                            <button onClick={handleRequestClick}>Request for dress</button>
+                            <button
+                                type="button"
+                                onClick={() => handleRequestClick(dress)}
+                            >
+                                Request for dress
+                            </button>
                         </div>
                     ))}
                 </div>

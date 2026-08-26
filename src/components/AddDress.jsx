@@ -21,7 +21,10 @@ function AddDress({ onAddDress, user }) {
 
     // Clear all local states when the user logs out
     useEffect(() => {
-        if (!user) {
+        if (user) {
+            setShowForm(true);
+        }
+        else{
             setAddedDresses([]);
             setSuccessMessage("");
             setLoginWarning("");
@@ -160,7 +163,7 @@ function AddDress({ onAddDress, user }) {
                             key={dress.id}>
                             {dress.imageUrl && (<img src={dress.imageUrl} alt={dress.itemName} />)}
 
-                            <p><strong>ID:</strong> {dress.id}</p>
+                           { /*<p><strong>ID:</strong> {dress.id}</p>*/}
                             <p><strong>Name:</strong> {dress.itemName}</p>
                             <p><strong>Style:</strong>{dress.traditionStyle}</p>
                             <p><strong>Gender:</strong>{dress.gender}</p>

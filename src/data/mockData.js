@@ -18,7 +18,7 @@ const initialDressList = [
         itemName:"Cotton Kurtha",
         traditionStyle:"Indian" ,
         gender:"boy" ,
-        age:"8-9 years" ,
+        age:"3-5 years" ,
         size:"S",
         condition:"like new",
         imageUrl:dress44
@@ -29,7 +29,7 @@ const initialDressList = [
         itemName:"Cotton Lehenga",
         traditionStyle:"Indian" ,
         gender:"girl" ,
-        age:"2-3 years" ,
+        age:"0-2 years" ,
         size:"L",
         condition:"good",
         imageUrl:dress66

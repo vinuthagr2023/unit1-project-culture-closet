@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import LandingPage from './components/LandingPage'
 import DonorLogin from './components/DonorLogin'
@@ -10,50 +10,61 @@ import AddDress from './components/AddDress'
 import BrowseDresses from './components/BrowseDresses'
 import initialDressList from './data/mockData'
 import Header from './components/Header'
+import MyRequests from './components/MyRequests'
 
 
 
 function App() {
   const [dressList, setDressList] = useState(initialDressList);
-  const[user,setUser]=useState(null); // tracks logged in username
-  const [requestedDresses,setRequestedDresses]=useState([]);
+  const [user, setUser] = useState(null); // tracks logged in username
+  const [requestedDresses, setRequestedDresses] = useState([]);
 
   // Derived state: automatically true if user exists, false if user is null
   const isLoggedIn = !!user;
- 
-  const handleLogin = (username)=>{
+
+  const handleLogin = (username) => {
     setUser(username);
   };
 
-  const handleLogout = ()=>{
+  const handleLogout = () => {
     setUser(null);
   };
   const handleAddDress = (newDress) => {
     setDressList((prevList) => [newDress, ...prevList]);
   };
   //Handler function to append new requests
-  const handleRequestDress = (requestedDresses)=>{
-    setRequestedDresses((prevRequests)=>[...prevRequests,requestedDresses]);
-  }
-  
+  const handleRequestDress = (dress) => {
+    setRequestedDresses((prevRequests) => {
+      const alreadyRequested = prevRequests.some((item) => item.id === dress.id);
+      if (!alreadyRequested) {
+        return [...prevRequests, dress];
+      }
+      return prevRequests;
+    });
+  };
+
   return (
     <div className='app-container'>
-      <Header isLoggedIn={isLoggedIn} 
-        user={user} 
-        onLogout={handleLogout}/>
+      <Header isLoggedIn={isLoggedIn}
+        user={user}
+        onLogout={handleLogout} />
 
-       <main>
+      <main>
         <Routes>
-          <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} username ={user} />} />
+          <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} username={user} />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path='/recent-dresses' element={<RecentDresses dresses={dressList}/>}/>
+          <Route path='/recent-dresses' element={<RecentDresses dresses={dressList} />} />
           <Route path="/donor-login" element={<DonorLogin onLogin={handleLogin} />} />
           <Route path="/user-login" element={<UserLogin onLogin={handleLogin} user={user} />} />
-          <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user}/>} />
+          <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user} />} />
           <Route path="/browse-dresses"
-           element = {<BrowseDresses dresses = {dressList} user = {user}
-          onRequestDress={handleRequestDress}
-          />}/>
+            element={<BrowseDresses dresses={dressList} user={user}
+              onRequestDress={handleRequestDress}
+            />} />
+          <Route
+            path="/my-requests"
+            element={<MyRequests requestedDresses={requestedDresses} />}
+          />
         </Routes>
       </main>
 

@@ -12,13 +12,13 @@ function Header({ isLoggedIn, user, onLogout}) {
             <nav className="nav">
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
-                <Link to="/browse-dresses">Browse</Link>
+               
              </nav>
 
             {/* User Session Info */}
             {isLoggedIn && (
                 <div className="user-session">
-                    <span>Welcome, <strong>{getDisplayName()}</strong>!</span>
+                    <span>Welcome, <strong>{user}</strong>!</span>
                     <button type="button" onClick={onLogout}>Logout</button>
                 </div>
             )}
