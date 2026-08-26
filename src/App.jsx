@@ -64,7 +64,7 @@ function App() {
             />} />
           <Route
             path="/my-requests"
-            element={<MyRequests requestedDresses={requestedDresses} />}
+            element={<MyRequests requestedDresses={requestedDresses} user={user} />}
           />
         </Routes>
       </main>

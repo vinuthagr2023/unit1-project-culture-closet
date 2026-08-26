@@ -1,9 +1,26 @@
-function MyRequests({ requestedDresses = [] }) {
+function MyRequests({ requestedDresses = [],user }) {
+    // Display link to login if user is logged out
+    if (!user) {
+        return (
+            <div className="my-request-container">
+                <h2>My Requested Outfits</h2>
+                <p>Please log in to view your requested dresses.</p>
+                <Link to="/user-login">
+                    Click here for User Login
+                </Link>
+
+            </div>
+        )
+    }
     return (
         <div className="my-request-container">
             <h2>My Requested Dress Details</h2>
-            {requestedDresses.length === 0 ? (
-                <p>You have not requested any dresses</p>
+           {requestedDresses.length === 0 ? (
+        <div>
+          <p>You have not requested any dresses yet.</p>
+          
+        </div>
+           
             ) : (
                 <div className="dress-container">
                     {requestedDresses.map((dress, index) =>
@@ -30,5 +47,5 @@ function MyRequests({ requestedDresses = [] }) {
     );
 }
 
-    
-    export default MyRequests;
+
+export default MyRequests;
