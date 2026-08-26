@@ -24,6 +24,7 @@ function App() {
 
   const handleLogin = (username) => {
     setUser(username);
+    setRequestedDresses([]);
   };
 
   const handleLogout = () => {

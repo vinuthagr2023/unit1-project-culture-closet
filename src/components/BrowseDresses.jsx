@@ -76,6 +76,14 @@ function BrowseDresses({ dresses = [], onRequestDress, user }) {
                 </div>
             )}
 
+            {user && (
+                <div style={{ marginBottom: "15px" }}>
+                    <Link to="/my-requests">
+                    View My Requested dresses
+                    </Link>
+                </div>
+            )}
+
             {/* Filter Section */}
             <div className="filter-controls">
                 <input
