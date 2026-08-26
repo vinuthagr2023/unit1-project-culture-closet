@@ -19,6 +19,12 @@ function MyRequests({ requestedDresses = [],user }) {
            {requestedDresses.length === 0 ? (
         <div>
           <p>You have not requested any dresses yet.</p>
+          <Link 
+            to="/browse-dresses" 
+            style={{ fontWeight: "bold", color: "#0d6efd", textDecoration: "underline" }}
+          >
+            Browse Dresses
+          </Link>
           
         </div>
            
