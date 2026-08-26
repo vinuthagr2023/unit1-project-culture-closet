@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import LandingPage from "./LandingPage";
-import dress11 from '../images/kids-dress-image11.jpg';
+
+
 
 function AddDress({ onAddDress, user }) {
     const [showForm, setShowForm] = useState(false);
@@ -45,7 +45,7 @@ function AddDress({ onAddDress, user }) {
         setLoginWarning("");
         setShowForm(true);
         setSuccessMessage("");
-        setLastAddedDress(null);
+        //setLastAddedDress(null);
 
     };
     const handleSubmit = (e) => {
@@ -106,16 +106,21 @@ function AddDress({ onAddDress, user }) {
                             required />
                     </label><br />
                     <label>Gender:
-                        <select name="gender" value={formData.gender} onChange={handleChange}>
+                        <select name="gender" value={formData.gender} onChange={handleChange} required>
                             <option value="" disabled>Select Gender</option>
                             <option value="girl">Girl</option>
                             <option value="boy">Boy</option>
                         </select><br />
                     </label>
                     <label>Age:
-                        <input type="text" name="age" value={formData.age} onChange={handleChange}
-                            required /><br />
-                    </label>
+                        <select name="age" value={formData.age} onChange={handleChange} required>
+                            <option value="all">All Ages</option>
+                            <option value="0-2 years">0-2 years</option>
+                            <option value="3-5 years">3-5 years</option>
+                            <option value="6-8 years">6-8 years</option>
+                            <option value="9-12 years">9-12 years</option>
+                        </select><br />
+                     </label>
                     <label>Size:
                         <input type="text" name="size" value={formData.size} onChange={handleChange}
                             required /><br />
@@ -125,7 +130,7 @@ function AddDress({ onAddDress, user }) {
                             required /><br />
                     </label>
                     <label>Photo:
-                        <input type="file" name="image/*" onChange={(e) => {
+                        <input type="file" accept="image/*" onChange={(e) => {
                             const file = e.target.files[0];
                             if (file) {
                                 // Converts local computer file into a viewable browser URL

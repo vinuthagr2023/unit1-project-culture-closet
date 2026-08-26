@@ -29,6 +29,12 @@ function App() {
   const handleAddDress = (newDress) => {
     setDressList((prevList) => [newDress, ...prevList]);
   };
+
+  const [requestedDresses, setRequestedDresses] = useState([]);
+  //Handler function to append new requests
+  const handleRequestDress = (requestedDress) => {
+    setRequestedDresses((prevRequests) => [...prevRequests, requestedDress]);
+  };
   
   return (
     <div className='app-container'>
@@ -57,9 +63,11 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path='/recent-dresses' element={<RecentDresses dresses={dressList}/>}/>
           <Route path="/donor-login" element={<DonorLogin onLogin={handleLogin} />} />
-          <Route path="/user-login" element={<UserLogin onAddDress={handleAddDress} user={user}/>} />
+          <Route path="/user-login" element={<UserLogin onLogin={handleLogin} user={user} />} />
           <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user}/>} />
-          <Route path="/browse-dresses" element = {<BrowseDresses dresses = {dressList}/>}/>
+          <Route path="/browse-dresses" element = {<BrowseDresses dresses = {dressList} user = {user}
+          onRequestDress={handleRequestDress}
+          />}/>
         </Routes>
       </main>
 
