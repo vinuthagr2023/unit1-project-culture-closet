@@ -10,7 +10,7 @@ const initialDressList = [
         age:"6-8 years" ,
         size:"M",
         condition:"gently used",
-      //  imageUrl:dress33
+        imageUrl:dress66
 
     },
      {
@@ -21,7 +21,7 @@ const initialDressList = [
         age:"8-9 years" ,
         size:"S",
         condition:"like new",
-      //  imageUrl:dress44
+        imageUrl:dress44
 
     },
      {
@@ -32,7 +32,7 @@ const initialDressList = [
         age:"2-3 years" ,
         size:"L",
         condition:"good",
-    //    imageUrl:dress66
+        imageUrl:dress66
 
     }
 

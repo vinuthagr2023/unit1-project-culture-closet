@@ -12,7 +12,7 @@ import initialDressList from './data/mockData'
 
 
 function App() {
-  const [dressList, setDressList] = useState([]);
+  const [dressList, setDressList] = useState(initialDressList);
 
   const[user,setUser]=useState(null); // tracks login username
 
