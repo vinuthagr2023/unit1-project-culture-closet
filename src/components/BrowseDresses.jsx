@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function BrowseDresses({ dresses = [], onRequestDress, user }) {
+function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDress }) {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGender, setSelectedGender] = useState("all");
     const [selectedAge, setSelectedAge] = useState("all");
@@ -28,11 +28,10 @@ function BrowseDresses({ dresses = [], onRequestDress, user }) {
         if (typeof onRequestDress === "function") {
             onRequestDress(dress);
         }
-
+        ale
         setSuccessMessage(`Request sent for: ${dress.itemName || dress.name || "this dress"}`);
     };
-
-
+   
     const safeDresses = Array.isArray(dresses) ? dresses : [];
 
     const filteredDresses = safeDresses.filter((dress) => {
@@ -113,7 +112,13 @@ function BrowseDresses({ dresses = [], onRequestDress, user }) {
                 <p>No dresses match your search criteria.</p>
             ) : (
                 <div className="dresses-container">
-                    {filteredDresses.map((dress) => (
+                    {filteredDresses.map((dress,index) => {
+
+                        // Check if item is already in requestedDresses
+                        const isRequested = requestedDresses.some(
+                            (item) => item && dress.id && item.id === dress.id
+                        );
+                        return(
                         <div key={dress.id}>
                             {dress.imageUrl ? (
                                 <img src={dress.imageUrl}
@@ -130,14 +135,15 @@ function BrowseDresses({ dresses = [], onRequestDress, user }) {
                             <button
                                 type="button"
                                 onClick={() => handleRequestClick(dress)}
+                                disabled={isRequested} // Disables button when requested
                             >
-                                Request for dress
-                            </button>
-                        </div>
-                    ))}
+                              {isRequested ? "Pending Pickup" : "Request for dress"}  
+                         </button>
+                            </div>
+                        );
+                    })}
                 </div>
             )}
-
         </div>
     );
 }

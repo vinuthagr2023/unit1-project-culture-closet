@@ -24,11 +24,11 @@ function App() {
 
   const handleLogin = (username) => {
     setUser(username);
-   };
+  };
 
   const handleLogout = () => {
     setUser(null);
-     setRequestedDresses([]);
+    setRequestedDresses([]);
   };
   const handleAddDress = (newDress) => {
     setDressList((prevList) => [newDress, ...prevList]);
@@ -60,6 +60,7 @@ function App() {
           <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user} />} />
           <Route path="/browse-dresses"
             element={<BrowseDresses dresses={dressList} user={user}
+              requestedDresses={requestedDresses}
               onRequestDress={handleRequestDress}
             />} />
           <Route
