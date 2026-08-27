@@ -13,16 +13,18 @@ import UserLogin from "./UserLogin";
 import RecentDresses from "./RecentDresses";
 
 
-function LandingPage({isLoggedIn}) {
-    
+function LandingPage({ user }) {
+    const isDonorLoggedIn = user?.role === "donor";
+    const isUserLoggedIn = user?.role === "user";
+
     const [dresses, setDresses] = useState(initialDressList);
 
     const [isOpen, setIsOpen] = useState(false);
 
-  
+
     return (
         <div>
-             <div className="recentItem">
+            <div className="recentItem">
                 <Link to="/recent-dresses" className="recent-item">Recent Dresses</Link>
             </div>
             <div className="Categery">
@@ -45,32 +47,32 @@ function LandingPage({isLoggedIn}) {
             <section>
                 <div className="slogan">
                     <h2>Share your heritage</h2>
-                   
+
                 </div>
 
 
-                <div className="categery_buttons">
-                    <Link to={isLoggedIn ? "/add-dress" : "/donor-login"}>
-                    <button type="click" className="donate"> Donate dresses</button>
+                <div className="categeries">
+                    <Link to={isDonorLoggedIn ? "/add-dress" : "/donor-login"} className="donate">
+                      Donate dresses
                     </Link>
-                    <Link to={isLoggedIn ? "/add-dress" : "/user-login"}>
-                    <button type ="click" className="find"> Find and Get dresses</button>
-                    </Link>
+                    <Link to={isUserLoggedIn ? "/browse-dresses" : "/user-login"}  className="find">
+                    Find and Request Dress
+                       </Link>
                 </div><br></br>
 
                 <div>
-                     <p>Connect families to pass down and share traditional children cloths</p><br/>
+                    <p>Connect families to pass down and share traditional children cloths</p><br />
                 </div>
 
-                
+
                 <div className="images">
-                    <img src={closetImage1}/> 
+                    <img src={closetImage1} />
                     <img src={dress11} />
-                    <img src={closetImage2}/> 
-                   
+                    <img src={closetImage2} />
+
                 </div><br></br>
             </section>
-         
+
 
 
         </div>

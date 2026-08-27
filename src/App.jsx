@@ -19,12 +19,17 @@ function App() {
   const [user, setUser] = useState(null); // tracks logged in username
   const [requestedDresses, setRequestedDresses] = useState([]);
 
-  // Derived state: automatically true if user exists, false if user is null
-  const isLoggedIn = !!user;
-
-  const handleLogin = (username) => {
-    setUser(username);
+  const handleDonorLogin = (userData) => {
+    setUser({ ...userData, role: "donor" });
   };
+
+  const handleUserLogin = (userData) => {
+    setUser({ ...userData, role: "user" });
+  };
+  const isLoggedIn = Boolean(user);
+  const isDonorLoggedIn = user?.role === "donor";
+  const isUserLoggedIn = user?.role === "user";
+
 
   const handleLogout = () => {
     setUser(null);
@@ -47,16 +52,22 @@ function App() {
   return (
     <div className='app-container'>
       <Header isLoggedIn={isLoggedIn}
+        isDonorLoggedIn={isDonorLoggedIn}
+        isUserLoggedIn={isUserLoggedIn}
         user={user}
         onLogout={handleLogout} />
 
       <main>
         <Routes>
-          <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} username={user} />} />
+          <Route path="/" element={<LandingPage 
+          isLoggedIn={isLoggedIn}
+           isDonorLoggedIn={isDonorLoggedIn}
+           isUserLoggedIn={isUserLoggedIn}
+            username={user} />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path='/recent-dresses' element={<RecentDresses dresses={dressList} />} />
-          <Route path="/donor-login" element={<DonorLogin onLogin={handleLogin} />} />
-          <Route path="/user-login" element={<UserLogin onLogin={handleLogin} user={user} />} />
+          <Route path="/donor-login" element={<DonorLogin onLogin={handleDonorLogin} />} />
+          <Route path="/user-login" element={<UserLogin onLogin={handleUserLogin} user={user} />} />
           <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user} />} />
           <Route path="/browse-dresses"
             element={<BrowseDresses dresses={dressList} user={user}

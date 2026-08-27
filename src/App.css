@@ -1,20 +1,21 @@
-.title{
-    background-color: rgb(245, 241, 44);
- border: 5px;
- border-radius: 8px;
- padding: 20px;
- margin: 0%;
- color: green;
- font-size: 50px;
+.title {
+  background-color: rgb(245, 241, 44);
+  border: 5px;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 0%;
+  color: green;
+  font-size: 50px;
 }
-.logo{
+
+.logo {
   color: red;
   font-size: 20px;
 }
 
-.nav{
-    display: flex;
-  justify-content:center;
+.nav {
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 12px;
   width: fit-content;
@@ -26,9 +27,9 @@
 
 
 
-.recentItem{
-   display: flex;
-  justify-content:center;
+.recentItem {
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 12px;
   width: fit-content;
@@ -37,32 +38,22 @@
   border-bottom: 1px solid #ddd;
 }
 
-.dropDownMenu,.dropdown{
-   display: flex;
-  justify-content:end;
+.dropDownMenu,
+.dropdown {
+  display: flex;
+  justify-content: right;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   width: fit-content;
   padding: 8px 30px;
   background-color: #f8f9fa;
   border-bottom: 1px solid #ddd;
 }
-.donate{
-  background-color: pink;
- border: 5px;
- border-radius: 5px;
- padding: 10px;
- margin: 0%;
- color: green;
- font-size: 30px;
+.categeries {
+  display: flex;
+  justify-content: center; /* Centers links horizontally */
+  align-items: center;     /* Aligns links vertically */
+  gap: 20px;               /* Adds space between the links */
+  margin-top: 20px;
+}
 
-}
-.find{
- background-color: pink;
- border: 5px;
- border-radius: 5px;
- padding: 10px;
- margin: 0%;
- color: red;
- font-size: 30px;
-}

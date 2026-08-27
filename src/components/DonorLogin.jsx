@@ -30,7 +30,7 @@ function DonorLogin({onLogin}) {
         }
         // Pass validated name to parent state
         if(typeof onLogin==="function"){
-            onLogin(name); // Pass username to App.jsx state
+            onLogin({ name, email, role: "donor" });
         }
     };
 

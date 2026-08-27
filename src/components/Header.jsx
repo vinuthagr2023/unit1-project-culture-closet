@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
-function Header({ isLoggedIn, user, onLogout}) {  
+function Header({ user, onLogout}) {  
+    const isLoggedIn = Boolean(user);
+    const displayName = typeof user === "object" ? user?.name : user;
     
     return (
         <header className="main-header">
@@ -19,7 +21,7 @@ function Header({ isLoggedIn, user, onLogout}) {
             {/* User Session Info */}
             {isLoggedIn && (
                 <div className="user-session">
-                    <span>Welcome, <strong>{user}</strong>!</span>
+                    <span>Welcome, <strong>{displayName}</strong>!</span>
                     <button type="button" onClick={onLogout}>Logout</button>
                 </div>
             )}

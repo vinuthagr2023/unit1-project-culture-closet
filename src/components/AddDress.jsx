@@ -8,6 +8,7 @@ function AddDress({ onAddDress, user }) {
     const [successMessage, setSuccessMessage] = useState("");
     const [loginWarning, setLoginWarning] = useState("");
     const [addedDresses, setAddedDresses] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const [formData, setFormData] = useState({
         itemName: '',
@@ -19,18 +20,31 @@ function AddDress({ onAddDress, user }) {
         imageUrl: ""
     });
 
+    const isDonor = user?.role === "donor";
     // Clear all local states when the user logs out
     useEffect(() => {
-        if (user) {
+        if (isDonor) {
             setShowForm(true);
+            setLoginWarning("");
         }
         else{
             setAddedDresses([]);
             setSuccessMessage("");
-            setLoginWarning("");
+            setLoginWarning(user ? "Only registered donors can post dresses." : "");
+            setErrorMessage("");
             setShowForm(false);
         }
-    }, [user]);
+    }, [user,isDonor]);
+
+    const isFormValid = Boolean(
+        formData.itemName.trim() &&
+        formData.traditionStyle.trim() &&
+        formData.gender.trim() &&
+        formData.age.trim() &&
+        formData.size.trim() &&
+        formData.condition.trim() &&
+        formData.imageUrl.trim()
+    );
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -48,11 +62,16 @@ function AddDress({ onAddDress, user }) {
         setLoginWarning("");
         setShowForm(true);
         setSuccessMessage("");
+        setErrorMessage("");
         //setLastAddedDress(null);
 
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+        if(!isFormValid){
+            setErrorMessage("Please fill out all fields and select a photo before submitting.");
+            return;
+        }
         if (typeof onAddDress !== "function") {
             console.error("onAddDress prop was not passed correctly to AddDress component.");
             return;
@@ -66,6 +85,8 @@ function AddDress({ onAddDress, user }) {
         setAddedDresses((prevDresses) => [newDress, ...prevDresses]);
         console.log('New dress submitted:', newDress);
         setSuccessMessage('Dress added successfully!');
+        setErrorMessage("");
+        //Reset form
         setFormData({
             itemName: "",
             traditionStyle: "",
@@ -100,6 +121,12 @@ function AddDress({ onAddDress, user }) {
             {showForm && (
                 <form onSubmit={handleSubmit} className="add-dress-form">
                     <h3>Fill Dress Details</h3>
+                    {/* Inline Validation Error Banner */}
+                    {errorMessage && (
+                        <p style={{ color: "#e74c3c", fontWeight: "bold", marginBottom: "10px" }}>
+                            {errorMessage}
+                        </p>
+                    )}
                     <label>Item Name:
                         <input type="text" name="itemName" value={formData.itemName} onChange={handleChange}
                             required />
@@ -142,13 +169,14 @@ function AddDress({ onAddDress, user }) {
                                     ...prev,
                                     imageUrl: localImageUrl,
                                 }));
+                                setErrorMessage("");
                             }
                         }}
                         />
 
-                    </label>
+                    </label><br/>
 
-                    <button type="submit">Submit Dress</button>
+                    <button type="submit" disabled = {!isFormValid}>Submit Dress</button>
                     <button type="button" onClick={() => setShowForm(false)}>
                         Cancel
                     </button>

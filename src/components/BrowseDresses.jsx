@@ -1,7 +1,10 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDress }) {
+    const isUserLoggedIn = user?.role === "user";
+    const isDonorLoggedIn = user?.role === "donor";
+
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGender, setSelectedGender] = useState("all");
     const [selectedAge, setSelectedAge] = useState("all");
@@ -31,7 +34,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
         ale
         setSuccessMessage(`Request sent for: ${dress.itemName || dress.name || "this dress"}`);
     };
-   
+
     const safeDresses = Array.isArray(dresses) ? dresses : [];
 
     const filteredDresses = safeDresses.filter((dress) => {
@@ -75,10 +78,10 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                 </div>
             )}
 
-            {user && (
+            {user?.role === "user" && (
                 <div style={{ marginBottom: "15px" }}>
                     <Link to="/my-requests">
-                    View My Requested dresses
+                        View My Requested dresses
                     </Link>
                 </div>
             )}
@@ -112,33 +115,41 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                 <p>No dresses match your search criteria.</p>
             ) : (
                 <div className="dresses-container">
-                    {filteredDresses.map((dress,index) => {
+                    {filteredDresses.map((dress, index) => {
 
                         // Check if item is already in requestedDresses
                         const isRequested = requestedDresses.some(
                             (item) => item && dress.id && item.id === dress.id
                         );
-                        return(
-                        <div key={dress.id}>
-                            {dress.imageUrl ? (
-                                <img src={dress.imageUrl}
-                                    alt={dress.itemName} />
-                            ) : (<span>No Image Provided</span>
+                        return (
+                            <div key={dress.id}>
+                                {dress.imageUrl ? (
+                                    <img src={dress.imageUrl}
+                                        alt={dress.itemName} />
+                                ) : (<span>No Image Provided</span>
 
-                            )}
-                            <h3>{dress.itemName}</h3>
-                            <p><strong>Style:</strong>{dress.traditionStyle}</p>
-                            <p> <strong>Gender:</strong>{dress.gender}</p>
-                            <p> <strong>Age:</strong>{dress.age}</p>
-                            <p> <strong>Size:</strong>{dress.size}</p>
-                            <p> <strong>Condition:</strong>{dress.condition}</p>
-                            <button
-                                type="button"
-                                onClick={() => handleRequestClick(dress)}
-                                disabled={isRequested} // Disables button when requested
-                            >
-                              {isRequested ? "Pending Pickup" : "Request for dress"}  
-                         </button>
+                                )}
+                                <h3>{dress.itemName}</h3>
+                                <p><strong>Style:</strong>{dress.traditionStyle}</p>
+                                <p> <strong>Gender:</strong>{dress.gender}</p>
+                                <p> <strong>Age:</strong>{dress.age}</p>
+                                <p> <strong>Size:</strong>{dress.size}</p>
+                                <p> <strong>Condition:</strong>{dress.condition}</p>
+                                {isUserLoggedIn ? (
+                                    <button
+                                        type="button"
+                                        onClick={() => handleRequestClick(dress)}
+                                        disabled={isRequested} // Disables button when requested
+                                    >
+                                        {dress.status === "Pending Pickup" ? "Pending Pickup" : "Request Dress"}
+                                    </button>
+                                ) : isDonorLoggedIn ? (
+                                    <p className="role-note">Switch to a recipient account to request items.</p>
+                                ) : (
+                                    <Link to="/user-login" className="login-link">
+                                        Login as User to Request
+                                    </Link>
+                                )}
                             </div>
                         );
                     })}
