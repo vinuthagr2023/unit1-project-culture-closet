@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDress }) {
     const isUserLoggedIn = user?.role === "user";
@@ -10,6 +11,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
     const [selectedAge, setSelectedAge] = useState("all");
     const [loginWarning, setLoginWarning] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const [requestedIds, setRequestedIds] = useState([]);
 
     // Automatically clear warning whenever user logs in
     useEffect(() => {
@@ -26,15 +28,17 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
             return;
         }
         setLoginWarning("");
+        setRequestedIds((prev) => [...prev, dress.id]);
 
         // Call parent handler if passed
         if (typeof onRequestDress === "function") {
             onRequestDress(dress);
         }
-        ale
+        
         setSuccessMessage(`Request sent for: ${dress.itemName || dress.name || "this dress"}`);
     };
 
+   
     const safeDresses = Array.isArray(dresses) ? dresses : [];
 
     const filteredDresses = safeDresses.filter((dress) => {
@@ -136,13 +140,15 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                                 <p> <strong>Size:</strong>{dress.size}</p>
                                 <p> <strong>Condition:</strong>{dress.condition}</p>
                                 {isUserLoggedIn ? (
-                                    <button
+                                    <Button
                                         type="button"
                                         onClick={() => handleRequestClick(dress)}
-                                        disabled={isRequested} // Disables button when requested
+                                        disabled={isRequested || dress.status === "Pending Pickup"} // Disables button when requested
                                     >
-                                        {dress.status === "Pending Pickup" ? "Pending Pickup" : "Request Dress"}
-                                    </button>
+                                        {isRequested || dress.status === "Pending Pickup"
+                                            ? "Requested"
+                                            : "Request Dress"}
+                                    </Button>
                                 ) : isDonorLoggedIn ? (
                                     <p className="role-note">Switch to a recipient account to request items.</p>
                                 ) : (
