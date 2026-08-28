@@ -2,19 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 //import initialDressList from "../../data/mockData";
 import "./LandingPage.css";
-//import DressCard from "../dresscard/DressCard";
-//import DonorLogin from "../donorlogin/DonorLogin";
-//import UserLogin from "../userlogin/UserLogin";
-//import RecentDresses from "../recentdresses/RecentDresses";
-
 
 function LandingPage({ user }) {
     const isDonorLoggedIn = user?.role === "donor";
-    const isUserLoggedIn = user?.role === "user";
-
-    //const [dresses, setDresses] = useState(initialDressList);
-
+    const isUserLoggedIn = user?.role === "user";   
     const [isOpen, setIsOpen] = useState(false);
+
+     //const [dresses, setDresses] = useState(initialDressList);
 
 
     return (
