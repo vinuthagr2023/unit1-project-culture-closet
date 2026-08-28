@@ -1,0 +1,20 @@
+.recentItem {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.recent-item {
+ 
+  color: #1b5e20;
+  font-weight: 600;
+  text-decoration: none;
+ 
+
+}
+
+.recent-item:hover {
+ 
+  color: #3a16dd;
+ 
+}
