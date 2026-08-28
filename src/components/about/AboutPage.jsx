@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 import "./AboutPage.css";
+
 function AboutPage() {
     return (
-        <div>
+        <div className="about-container">
             <h2 className="about-title">About Culture Closet</h2>
 
             <p className="about-text">
