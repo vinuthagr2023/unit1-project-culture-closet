@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import "./AddDress.css";
 
 
-function AddDress({ onAddDress, user }) {
+function AddDress({ onAddDress,onDeleteDress, user }) {
     const [showForm, setShowForm] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [loginWarning, setLoginWarning] = useState("");
     const [addedDresses, setAddedDresses] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
+    const [deleteMessage, setDeleteMessage] = useState("");
 
     const [formData, setFormData] = useState({
         itemName: '',
@@ -27,14 +28,15 @@ function AddDress({ onAddDress, user }) {
             setShowForm(false);
             setLoginWarning("");
         }
-        else{
+        else {
             setAddedDresses([]);
             setSuccessMessage("");
+            setDeleteMessage("");
             setLoginWarning(user ? "Only registered donors can post dresses." : "");
             setErrorMessage("");
             setShowForm(false);
         }
-    }, [user,isDonor]);
+    }, [user, isDonor]);
 
     const isFormValid = Boolean(
         formData.itemName.trim() &&
@@ -63,12 +65,13 @@ function AddDress({ onAddDress, user }) {
         setShowForm(true);
         setSuccessMessage("");
         setErrorMessage("");
+        setDeleteMessage("");
         //setLastAddedDress(null);
 
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(!isFormValid){
+        if (!isFormValid) {
             setErrorMessage("Please fill out all fields and select a photo before submitting.");
             return;
         }
@@ -86,6 +89,8 @@ function AddDress({ onAddDress, user }) {
         console.log('New dress submitted:', newDress);
         setSuccessMessage('Dress added successfully!');
         setErrorMessage("");
+        setDeleteMessage("");
+
         //Reset form
         setFormData({
             itemName: "",
@@ -100,6 +105,22 @@ function AddDress({ onAddDress, user }) {
         setShowForm(false);
     }
 
+   const handleDeleteDress = (idToDelete) => {
+        const itemToRemove = addedDresses.find((dress) => dress.id === idToDelete);
+        const deletedName = itemToRemove ? itemToRemove.itemName : "Dress";
+
+        setAddedDresses((prevDresses) => prevDresses.filter((dress) => dress.id !== idToDelete));
+        
+        // Show deletion message and clear other status messages
+        setDeleteMessage(`"${deletedName}" deleted successfully.`);
+        setSuccessMessage("");
+        setErrorMessage("");
+
+        if (typeof onDeleteDress === "function") {
+            onDeleteDress(idToDelete);
+        }
+    };
+
     return (
         <div className="add-dress-container">
             <h2> Donor Portal</h2>
@@ -111,7 +132,11 @@ function AddDress({ onAddDress, user }) {
             {successMessage && (
                 <p style={{ color: "green", fontWeight: "bold" }}>{successMessage}</p>
             )}
-
+            {deleteMessage && (
+                <p className="delete-banner">
+                    {deleteMessage}
+                </p>
+            )}
             {!showForm && (
                 <button onClick={handleShowForm} className="add-btn">
                     {addedDresses.length > 0 ? "Add another dress" : "Add a Dress"}
@@ -150,7 +175,7 @@ function AddDress({ onAddDress, user }) {
                             <option value="6-8 years">6-8 years</option>
                             <option value="9-12 years">9-12 years</option>
                         </select><br />
-                     </label>
+                    </label>
                     <label>Size:
                         <input type="text" name="size" value={formData.size} onChange={handleChange}
                             required /><br />
@@ -174,9 +199,9 @@ function AddDress({ onAddDress, user }) {
                         }}
                         />
 
-                    </label><br/>
+                    </label><br />
 
-                    <button type="submit" disabled = {!isFormValid}>Submit Dress</button>
+                    <button type="submit" disabled={!isFormValid}>Submit Dress</button>
                     <button type="button" onClick={() => setShowForm(false)}>
                         Cancel
                     </button>
@@ -184,19 +209,24 @@ function AddDress({ onAddDress, user }) {
 
             )}
             {addedDresses.length > 0 && (
-                <div>
+                <div className="added-dresses-section">
                     <h3>Your Added Dresses ({addedDresses.length})</h3>
                     {addedDresses.map((dress) => (
-                        <div
-                            key={dress.id}>
+                        <div className="dress-preview-card" key={dress.id}>
                             {dress.imageUrl && (<img src={dress.imageUrl} alt={dress.itemName} />)}
 
-                           { /*<p><strong>ID:</strong> {dress.id}</p>*/}
+                            { /*<p><strong>ID:</strong> {dress.id}</p>*/}
                             <p><strong>Name:</strong> {dress.itemName}</p>
                             <p><strong>Style:</strong>{dress.traditionStyle}</p>
                             <p><strong>Gender:</strong>{dress.gender}</p>
                             <p><strong>Age:</strong>{dress.age}</p>
                             <p><strong>Size:</strong>{dress.size}</p>
+                            <button
+                                className="delete-card-btn"
+                                onClick={() => handleDeleteDress(dress.id)}
+                            >
+                                Delete
+                            </button>
 
                         </div>
 
