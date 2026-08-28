@@ -1,3 +1,7 @@
+/* ==========================================
+   DONOR PORTAL / ADD DRESS STYLES (SINGLE-PAGE COMPACT)
+   ========================================== */
+
 .add-dress-container {
   max-width: 650px;
   margin: 10px auto;
@@ -11,20 +15,21 @@
 
 .add-dress-container h2 {
   color: #2e7d32;
-  font-size: 2rem;
+  font-size: 30px;
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   text-align: center;
 }
 
 .login-warning {
   background-color: #fff3cd;
   color: #856404;
-  padding: 12px 16px;
+  padding: 8px 12px;
   border: 1px solid #ffeeba;
   border-radius: 6px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   text-align: center;
+  font-size: 0.9rem;
 }
 
 .login-warning a {
@@ -36,11 +41,11 @@
 
 .add-btn {
   display: block;
-  margin: 20px auto;
-  padding: 14px 28px;
+  margin: 12px auto;
+  padding: 10px 24px;
   background-color: green;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   border: none;
   border-radius: 6px;
@@ -52,39 +57,163 @@
   background-color: #6ce672;
   transform: translateY(-2px);
 }
+
+/* 2-Column Ultra-Compact Grid Form */
 .add-dress-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 14px;
   background-color: #f8f9fa;
   border: 1px solid #e9ecef;
-  padding: 24px;
+  padding: 12px 16px;
   border-radius: 8px;
-  margin-top: 20px;
 }
 
-
 .add-dress-form h3 {
+  grid-column: 1 / -1;
   margin-top: 0;
-  margin-bottom: 10px;      /* Shrinks heading space */
-  font-size: 1.2rem;
+  margin-bottom: 4px;
+  font-size: 25px;
+  color: blue;
+}
+
+.error-banner {
+  grid-column: 1 / -1;
+  color: #e74c3c;
+  font-weight: bold;
+  margin: 0 0 6px 0;
+  font-size: 0.85rem;
 }
 
 .add-dress-form label {
   display: block;
   font-weight: 600;
   color: #495057;
-  margin-bottom: 6px;       /* Decreased gap between rows */
-  font-size: 0.88rem;      /* Slightly smaller label text */
+  margin-bottom: 2px;
+  font-size: 0.85rem;
 }
 
 .add-dress-form input[type="text"],
-.add-dress-form select,
-.add-dress-form input[type="file"] {
+.add-dress-form select {
   display: block;
-  width: 70%;
-  padding: 5px 8px;         /* Reduced height inside inputs */
-  margin-top: 2px;          /* Draws input closer to its label text */
+  width: 100%;
+  height: 30px;
+  padding: 4px 8px;
+  margin-top: 2px;
   border: 1px solid #ced4da;
   border-radius: 4px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   box-sizing: border-box;
   background-color: #ffffff;
+}
+.add-dress-form label,button[type="submit"]{
+    font-weight: bold;
+    color: green;
+    font-size: 18px;
+}
+.add-dress-form button[type="button"]{
+     font-weight: bold;
+    color: red;
+    font-size: 18px;
+}
+
+.add-dress-form input[type="text"]:focus,
+.add-dress-form select:focus {
+  outline: none;
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+}
+
+.add-dress-form input[type="file"] {
+  display: block;
+  width: 100%;
+  margin-top: 2px;
+  font-size: 0.8rem;
+}
+
+/* Form Action Buttons Container */
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.form-actions button[type="submit"] {
+  flex: 2;
+  padding: 8px 14px;
+  background-color: #28a745;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-actions button[type="submit"]:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+
+.form-actions button[type="button"] {
+  flex: 1;
+  padding: 8px 14px;
+  background-color: #dc3545;
+  color: #dc1919;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-actions button[type="button"]:hover {
+  background-color: #c82333;
+}
+
+/* Submitted Dresses Preview Section */
+.added-dresses-section {
+  margin-top: 16px;
+  border-top: 2px dashed #de2323;
+  padding-top: 10px;
+}
+
+.added-dresses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.dress-preview-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dress-preview-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.dress-preview-card p {
+  margin: 4px 0;
+  font-size: 0.82rem;
+  color: #555555;
+}
+
+/* Mobile Fallback */
+@media (max-width: 580px) {
+  .add-dress-form {
+    grid-template-columns: 1fr;
+  }
 }

@@ -81,13 +81,13 @@
 
 .user-session span {
   font-size: 25px;
-  color: green;
+  color: blue;
   font-weight: bold;
 
 }
 
 .user-session strong {
-  color: #e30c1e;
+  color: #ff0015;
   font-size: 20px;
   font-weight: bold;
 }
