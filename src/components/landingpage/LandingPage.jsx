@@ -10,10 +10,8 @@ function LandingPage({ user }) {
 
      //const [dresses, setDresses] = useState(initialDressList);
 
-
     return (
         <div>
-
             <div className="recentItem">
                 <Link to="/recent-dresses" className="recent-item">
                     Recent Dresses
@@ -39,7 +37,7 @@ function LandingPage({ user }) {
 
             <section>
                 <div className="slogan">
-                    <h2>Share your heritage</h2>
+                    <h2>----- Share your heritage ------ </h2>
 
                 </div>
 

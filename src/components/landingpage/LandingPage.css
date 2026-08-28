@@ -8,6 +8,7 @@
 
     color: #1b5e20;
     font-weight: 600;
+    font-size: large;
     text-decoration: none;
     margin-right: 20px;
     margin-top: 10px;
@@ -36,6 +37,38 @@
 }
 
 .dropdown:hover {
-    background-color: #cab135;
+    background-color: #ec7317;
     border-color: #adb5bd;
 }
+
+.dropdown-item-donor,
+.dropdown-item-user {
+  display: inline-block;
+  padding: 6px 12px;
+  color: #126e2d;
+  text-decoration: underline;
+  font-weight: 600;
+  border-radius: 4px;
+  font-size: large;
+}
+
+.dropdown-item-donor:hover {
+  background-color: rgb(144, 193, 240); 
+}
+
+.dropdown-item-user:hover {
+  background-color: rgb(214, 236, 52); 
+}
+
+.slogan {
+  text-align: center;
+  margin: 20px 0 10px 0;
+}
+
+.slogan h2 {
+  font-size: 2.5rem;
+  color: #8528db;
+  font-weight: 700;
+  margin: 0;
+}
+

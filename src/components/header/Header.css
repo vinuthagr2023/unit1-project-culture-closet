@@ -39,8 +39,8 @@
   font-weight: 600;
   color: #d14809;
   margin: 10px 0 0 0;
-  text-transform: uppercase;
   letter-spacing: 1px;
+  text-decoration: underline;
 }
 
 .nav {
