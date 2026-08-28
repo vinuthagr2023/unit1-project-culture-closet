@@ -43,3 +43,27 @@
   letter-spacing: 1px;
 }
 
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: left; 
+  gap: 10px;
+  width: 100%;           
+  margin-top: 10px;
+
+}
+
+.nav a {
+  text-decoration: none;
+  color: #495057;
+  font-weight: 600;
+  font-size: 20px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: #0c7449;
+}
+
+.nav a:hover {
+  color:white;
+  background-color: green;
+}
