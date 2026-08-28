@@ -80,12 +80,16 @@
 }
 
 .user-session span {
-  font-size: 0.95rem;
-  color: #333333;
+  font-size: 25px;
+  color: green;
+  font-weight: bold;
+
 }
 
 .user-session strong {
-  color: #007bff;
+  color: #e30c1e;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .user-session button {
