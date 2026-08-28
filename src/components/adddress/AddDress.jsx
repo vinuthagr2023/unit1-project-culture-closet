@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import "./AddDress.css";
 
 
 function AddDress({ onAddDress, user }) {
@@ -24,7 +24,7 @@ function AddDress({ onAddDress, user }) {
     // Clear all local states when the user logs out
     useEffect(() => {
         if (isDonor) {
-            setShowForm(true);
+            setShowForm(false);
             setLoginWarning("");
         }
         else{

@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import './App.css'
-import LandingPage from './components/LandingPage'
-import DonorLogin from './components/DonorLogin'
-import UserLogin from './components/UserLogin'
-import AboutPage from './components/AboutPage'
-import RecentDresses from './components/RecentDresses'
-import AddDress from './components/AddDress'
-import BrowseDresses from './components/BrowseDresses'
+import LandingPage from './components/landingpage/LandingPage'
+import DonorLogin from './components/donorlogin/DonorLogin'
+import UserLogin from './components/userlogin/UserLogin'
+import AboutPage from './components/about/AboutPage'
+import RecentDresses from './components/recentdresses/RecentDresses'
+import AddDress from './components/adddress/AddDress'
+import BrowseDresses from './components/browsedress/BrowseDresses'
 import initialDressList from './data/mockData'
-import Header from './components/Header'
-import MyRequests from './components/MyRequests'
+import Header from './components/header/Header'
+import MyRequests from './components/myrequest/MyRequests'
+import Footer from './components/footer/Footer'
 
 
 
@@ -80,13 +81,9 @@ function App() {
           />
         </Routes>
       </main>
-
-      <footer className="footer">
-
-        <p>---------Spread tradition to others-------------</p>
-
-      </footer>
-
+        
+        <Footer/>
+      
     </div>
 
   )

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DressCard from "./DressCard";
+import DressCard from "../dresscard/DressCard";
 
 function RecentDresses({ dresses }) {
     return (

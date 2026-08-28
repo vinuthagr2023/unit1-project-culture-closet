@@ -1,0 +1,45 @@
+
+/* ==========================================
+   HEADER COMPONENT STYLES
+   ========================================== */
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 32px; /* Reduced vertical padding from 16px to 6px */
+  background-color: #eeea15;
+  border-bottom: 2px solid #e9ecef; 
+  flex-wrap: wrap;
+  gap: 0px;
+}
+
+
+.header-brand {
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+.header-brand .title {
+   width: 100%;
+  box-sizing: border-box;
+  text-align: center; 
+  background-color: rgb(233, 98, 35);
+  border: 5px solid green;
+  border-radius: 0; 
+  padding: 20px;
+  margin: 0;
+  color: green;
+  font-size: 50px;
+}
+
+.header-brand .logo {
+  font-size:larger;
+  font-weight: 600;
+  color: #d14809;
+  margin: 10px 0 0 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+

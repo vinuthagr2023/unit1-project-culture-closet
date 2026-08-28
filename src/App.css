@@ -1,59 +1,60 @@
-.title {
-  background-color: rgb(245, 241, 44);
-  border: 5px;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 0%;
-  color: green;
-  font-size: 50px;
+/* ==========================================
+   ABOUT PAGE STYLES
+   ========================================== */
+
+.about-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 36px 32px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-top: 5px solid #2e7d32;
+  box-sizing: border-box;
 }
 
-.logo {
-  color: red;
-  font-size: 20px;
+.about-title {
+  font-size: 2.2rem;
+  color: #2e7d32;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 24px;
 }
 
-.nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  width: fit-content;
-  padding: 8px 30px;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #ddd;
+.about-subtitle {
+  font-size: 1.5rem;
+  color: #6b800e;
+  font-weight: 600;
+  margin-top: 28px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #f0f4f1;
+  padding-bottom: 6px;
 }
 
-
-
-
-.recentItem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  width: fit-content;
-  padding: 8px 30px;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #ddd;
+.about-text {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: #444444;
+  margin-bottom: 16px;
 }
 
-.dropDownMenu,
-.dropdown {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  gap: 16px;
-  width: fit-content;
-  padding: 8px 30px;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #ddd;
-}
-.categeries {
-  display: flex;
-  justify-content: center; /* Centers links horizontally */
-  align-items: center;     /* Aligns links vertically */
-  gap: 20px;               /* Adds space between the links */
-  margin-top: 20px;
-}
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .about-container {
+    margin: 20px 16px;
+    padding: 24px 20px;
+  }
 
+  .about-title {
+    font-size: 1.8rem;
+  }
+
+  .about-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .about-text {
+    font-size: 1rem;
+  }
+}
