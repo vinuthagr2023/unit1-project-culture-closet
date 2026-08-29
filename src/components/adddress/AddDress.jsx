@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import "./AddDress.css";
 
 
-function AddDress({ onAddDress,onDeleteDress, user }) {
+function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
     const [showForm, setShowForm] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [loginWarning, setLoginWarning] = useState("");
-    const [addedDresses, setAddedDresses] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
     const [deleteMessage, setDeleteMessage] = useState("");
+
+    const useDresses = dresses.filter(dress => dress.donor === user?.username);
 
     const [formData, setFormData] = useState({
         itemName: '',
@@ -29,7 +31,6 @@ function AddDress({ onAddDress,onDeleteDress, user }) {
             setLoginWarning("");
         }
         else {
-            setAddedDresses([]);
             setSuccessMessage("");
             setDeleteMessage("");
             setLoginWarning(user ? "Only registered donors can post dresses." : "");
@@ -85,7 +86,6 @@ function AddDress({ onAddDress,onDeleteDress, user }) {
         };
         onAddDress(newDress);
 
-        setAddedDresses((prevDresses) => [newDress, ...prevDresses]);
         console.log('New dress submitted:', newDress);
         setSuccessMessage('Dress added successfully!');
         setErrorMessage("");
@@ -106,12 +106,10 @@ function AddDress({ onAddDress,onDeleteDress, user }) {
     }
 
    const handleDeleteDress = (idToDelete) => {
-        const itemToRemove = addedDresses.find((dress) => dress.id === idToDelete);
+        const itemToRemove = dresses.find((dress) => dress.id === idToDelete);
         const deletedName = itemToRemove ? itemToRemove.itemName : "Dress";
 
-        setAddedDresses((prevDresses) => prevDresses.filter((dress) => dress.id !== idToDelete));
-        
-        // Show deletion message and clear other status messages
+         // Show deletion message and clear other status messages
         setDeleteMessage(`"${deletedName}" deleted successfully.`);
         setSuccessMessage("");
         setErrorMessage("");
@@ -129,6 +127,9 @@ function AddDress({ onAddDress,onDeleteDress, user }) {
                     <Link to="/donor-login">Click here to Login</Link>
                 </p>
             )}
+             {errorMessage && (
+                        <p className="error-banner">{errorMessage}</p>
+                    )}
             {successMessage && (
                 <p style={{ color: "green", fontWeight: "bold" }}>{successMessage}</p>
             )}
@@ -139,7 +140,7 @@ function AddDress({ onAddDress,onDeleteDress, user }) {
             )}
             {!showForm && (
                 <button onClick={handleShowForm} className="add-btn">
-                    {addedDresses.length > 0 ? "Add another dress" : "Add a Dress"}
+                    {dresses.length > 0 ? "Add another dress" : "Add a Dress"}
                 </button>
             )}
 
@@ -147,11 +148,7 @@ function AddDress({ onAddDress,onDeleteDress, user }) {
                 <form onSubmit={handleSubmit} className="add-dress-form">
                     <h3>Fill Dress Details</h3>
                     {/* Inline Validation Error Banner */}
-                    {errorMessage && (
-                        <p style={{ color: "#e74c3c", fontWeight: "bold", marginBottom: "10px" }}>
-                            {errorMessage}
-                        </p>
-                    )}
+                   
                     <label>Item Name:
                         <input type="text" name="itemName" value={formData.itemName} onChange={handleChange}
                             required />
@@ -201,17 +198,17 @@ function AddDress({ onAddDress,onDeleteDress, user }) {
 
                     </label><br />
 
-                    <button type="submit" disabled={!isFormValid}>Submit Dress</button>
+                    <button type="submit" >Submit Dress</button>
                     <button type="button" onClick={() => setShowForm(false)}>
                         Cancel
                     </button>
                 </form>
 
             )}
-            {addedDresses.length > 0 && (
+            {dresses.length > 0 && (
                 <div className="added-dresses-section">
-                    <h3>Your Added Dresses ({addedDresses.length})</h3>
-                    {addedDresses.map((dress) => (
+                    <h3>Your Added Dresses ({dresses.length})</h3>
+                    {dresses.map((dress) => (
                         <div className="dress-preview-card" key={dress.id}>
                             {dress.imageUrl && (<img src={dress.imageUrl} alt={dress.itemName} />)}
 

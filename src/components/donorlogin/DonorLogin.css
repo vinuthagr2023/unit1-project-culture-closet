@@ -56,8 +56,8 @@
   width: 100%;
   padding: 12px 0;
   margin-top: 12px;
-  background-color: #2e7d32;
-  color: #ffffff;
+  background-color:rgb(101, 199, 223);
+  color:white;
   font-size: 1.1rem;
   font-weight: 700;
   text-align: center;
@@ -68,7 +68,7 @@
 }
 
 .Dlogin-button:hover {
-  background-color: #216e25;
+  background-color: #8dea92;
   transform: translateY(-1px);
 }
 @media (max-width: 480px) {

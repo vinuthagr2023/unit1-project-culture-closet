@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 //import initialDressList from "../../data/mockData";
 import "./LandingPage.css";
 
-function LandingPage({ user }) {
-    const isDonorLoggedIn = user?.role === "donor";
-    const isUserLoggedIn = user?.role === "user";
+function LandingPage({ isDonorLoggedIn = false, isUserLoggedIn = false, username = ""}) {
+    // isDonorLoggedIn = user?.role === "donor";
+   //  isUserLoggedIn = user?.role === "user";
     const [isOpen, setIsOpen] = useState(false);
 
     //const [dresses, setDresses] = useState(initialDressList);

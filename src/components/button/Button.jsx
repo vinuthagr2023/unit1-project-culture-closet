@@ -1,3 +1,5 @@
+import "./Button.css";
+
 function Button({ children, onClick, type = "button", className = "", disabled = false }) {
     return (
         <div>

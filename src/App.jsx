@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link ,Navigate,useNavigate} from 'react-router-dom'
 import './App.css'
 import LandingPage from './components/landingpage/LandingPage'
 import DonorLogin from './components/donorlogin/DonorLogin'
@@ -20,6 +20,8 @@ function App() {
   const [user, setUser] = useState(null); // tracks logged in username
   const [requestedDresses, setRequestedDresses] = useState([]);
 
+  const navigate = useNavigate();
+
   const handleDonorLogin = (userData) => {
     setUser({ ...userData, role: "donor" });
   };
@@ -35,10 +37,12 @@ function App() {
   const handleLogout = () => {
     setUser(null);
     setRequestedDresses([]);
+    navigate("/");
   };
   const handleAddDress = (newDress) => {
     setDressList((prevList) => [newDress, ...prevList]);
   };
+
   //Handler function to append new requests
   const handleRequestDress = (dress) => {
     setRequestedDresses((prevRequests) => {
@@ -51,7 +55,7 @@ function App() {
   };
 
   const handleDeleteDress = (idToDelete) => {
-  setDresses((prevDresses) => prevDresses.filter((dress) => dress.id !== idToDelete));
+  setDressList((prevDresses) => prevDresses.filter((dress) => Number(dress.id) !== Number(idToDelete)));
 };
 
   return (
@@ -68,12 +72,15 @@ function App() {
           isLoggedIn={isLoggedIn}
            isDonorLoggedIn={isDonorLoggedIn}
            isUserLoggedIn={isUserLoggedIn}
-            username={user} />} />
+            username={user}/>} />
           <Route path="/about" element={<AboutPage />} />
           <Route path='/recent-dresses' element={<RecentDresses dresses={dressList} />} />
-          <Route path="/donor-login" element={<DonorLogin onLogin={handleDonorLogin} />} />
-          <Route path="/user-login" element={<UserLogin onLogin={handleUserLogin} user={user} />} />
-          <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user} onDeleteDress={handleDeleteDress} />} />
+          <Route path="/donor-login"
+          element={isLoggedIn ? <Navigate to="/add-dress" replace /> : <DonorLogin onLogin={handleDonorLogin} />} />
+          <Route path="/user-login" 
+          element={isLoggedIn ? <Navigate to="/browse-dresses" replace /> 
+            : <UserLogin onLogin={handleUserLogin} />}/>
+          <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user} onDeleteDress={handleDeleteDress} dresses={dressList} />} />
           <Route path="/browse-dresses"
             element={<BrowseDresses dresses={dressList} user={user}
               requestedDresses={requestedDresses}
