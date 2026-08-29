@@ -7,7 +7,7 @@ function MyRequests({ requestedDresses = [],user }) {
         return (
             <div className="my-request-container">
                 <h2>My Requested Outfits</h2>
-                <p>Please log in to view your requested dresses.</p>
+                <p id="log-req" >Please log in to view your requested dresses.</p>
                 <Link to="/user-login">
                     Click here for User Login
                 </Link>
