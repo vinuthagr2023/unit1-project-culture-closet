@@ -1,0 +1,32 @@
+.my-request-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    font-family: inherit;
+}
+
+.my-request-container h2 {
+    font-size: 2rem;
+    color: #f0720b;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.not-req p {
+    
+    color: #620cb3;
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+,
+.my-request-container > div > p {
+    font-size: 1.1rem;
+    color: #495057;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+}

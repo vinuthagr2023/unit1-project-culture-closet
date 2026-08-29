@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./MyRequests.css";
 
 function MyRequests({ requestedDresses = [],user }) {
     // Display link to login if user is logged out
@@ -18,7 +19,7 @@ function MyRequests({ requestedDresses = [],user }) {
         <div className="my-request-container">
             <h2>My Requested Dress Details</h2>
            {requestedDresses.length === 0 ? (
-        <div>
+        <div className="not-req" >
           <p>You have not requested any dresses yet.</p>
           <Link 
             to="/browse-dresses" 
