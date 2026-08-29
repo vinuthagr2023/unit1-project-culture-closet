@@ -140,3 +140,56 @@
     font-size: 12px;
     font-weight: 700;
 }
+
+/* Breakpoint 1: Tablets and smaller screens (768px and below) */
+@media (max-width: 768px) {
+  .my-request-container {
+    padding: 30px 15px;
+  }
+
+  .my-request-container h2 {
+    font-size: 1.75rem;
+    margin-bottom: 25px;
+  }
+
+  .dress-container {
+    gap: 20px;
+    /* Slightly smaller gap between cards on tablet */
+  }
+
+  .dress-card img,
+  .dress-card > span:first-child {
+    height: 220px;
+  }
+}
+
+/* Breakpoint 2: Mobile phones (480px and below) */
+@media (max-width: 480px) {
+  .my-request-container {
+    padding: 20px 10px;
+  }
+
+  .my-request-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .dress-container {
+    /* Force a single column on very small screens for better readability */
+    grid-template-columns: 1fr; 
+    gap: 15px;
+  }
+
+  .dress-card {
+    padding: 15px;
+  }
+
+  .dress-card img,
+  .dress-card > span:first-child {
+    height: 200px;
+  }
+
+  .not-req {
+    padding: 30px 15px;
+  }
+}
