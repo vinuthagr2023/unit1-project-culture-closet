@@ -118,3 +118,44 @@
     font-size: 0.95rem;
 }
 
+.dresses-container h3 {
+    font-size: 1.25rem;
+    color: #343a40;
+    margin: 15px 15px 5px 15px;
+}
+
+.dresses-container p {
+    font-size: 0.95rem;
+    color: #495057;
+    margin: 4px 15px;
+}
+
+.dresses-container p strong {
+    color: #212529;
+}
+
+.dresses-container .role-note {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-style: italic;
+    margin: 15px;
+    text-align: center;
+}
+
+.dresses-container .login-link {
+    display: block;
+    margin: 15px;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.dresses-container .login-link:hover {
+    background-color: #0056b3;
+}
+
