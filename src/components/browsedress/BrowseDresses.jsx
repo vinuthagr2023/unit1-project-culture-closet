@@ -84,7 +84,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
             )}
 
             {user?.role === "user" && (
-                <div style={{ marginBottom: "15px" }}>
+                <div className="req-link" style={{ marginBottom: "15px" }}>
                     <Link to="/my-requests">
                         View My Requested dresses
                     </Link>

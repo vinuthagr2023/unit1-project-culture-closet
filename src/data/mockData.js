@@ -5,7 +5,7 @@ const initialDressList = [
     {
         id:1,
         itemName:"Teal Silk Lehenga",
-        traditionStyle:"Indian" ,
+        traditionStyle:"indian" ,
         gender:"girl" ,
         age:"6-8 years" ,
         size:"M",
@@ -16,7 +16,7 @@ const initialDressList = [
      {
         id:2,
         itemName:"Cotton Kurtha",
-        traditionStyle:"Indian" ,
+        traditionStyle:"indian" ,
         gender:"boy" ,
         age:"3-5 years" ,
         size:"S",
@@ -27,7 +27,7 @@ const initialDressList = [
      {
         id:3,
         itemName:"Cotton Lehenga",
-        traditionStyle:"Indian" ,
+        traditionStyle:"ndian" ,
         gender:"girl" ,
         age:"0-2 years" ,
         size:"L",
