@@ -1,0 +1,36 @@
+/* RecentDresses.css */
+
+.recent-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.recent-container h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.recentItem {
+    width: 100%;
+}
+
+.no-dresses-msg {
+    font-size: 1.1rem;
+    color: #6c757d;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.previewGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+    justify-content: center;
+}

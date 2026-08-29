@@ -17,14 +17,15 @@
 }
 
 .item-card-image {
-    width: 100%;
-    height: 220px;
+    width: 50%;
+    height: auto;
     object-fit: cover;
     background-color: #f8f9fa;
+    display: block;
 }
 
 .no-image-box {
-    width: 100%;
+   width: 100%;
     height: 220px;
     background-color: #e9ecef;
     color: #6c757d;
