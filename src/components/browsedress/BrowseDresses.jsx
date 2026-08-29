@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "../button/Button";
+import "./BrowseDresses.css";
 
 function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDress }) {
     const isUserLoggedIn = user?.role === "user";
@@ -60,8 +61,8 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
     });
 
     return (
-        <div>
-            <h2> Browse Cultural outfits </h2>
+        <div className="browse-container">
+            <h2> Browse Cultural Outfits </h2>
             {/* Render Login Warning Banner */}
             {!user && loginWarning && (
                 <div className="warning-banner" >
@@ -153,7 +154,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                                     <p className="role-note">Switch to a recipient account to request items.</p>
                                 ) : (
                                     <Link to="/user-login" className="login-link">
-                                        Login as User to Request
+                                        Login to Request
                                     </Link>
                                 )}
                             </div>

@@ -1,0 +1,52 @@
+/* BrowseDresses.css */
+
+.browse-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.browse-container h2 {
+    font-size: 2rem;
+    color: orangered;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Notification Banners */
+.warning-banner {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.success-banner {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Filter Controls */
+.filter-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    background-color: #afceec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
