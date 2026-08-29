@@ -46,7 +46,7 @@ function MyRequests({ requestedDresses = [],user }) {
                             <p><strong>Age:</strong> {dress.age}</p>
                             <p><strong>Size:</strong> {dress.size}</p>
                             <p><strong>Condition:</strong> {dress.condition}</p>
-                            <p><strong>Status:</strong> <span style={{ color: "#e67e22", fontWeight: "bold" }}>Pending Pickup</span></p>
+                            <p><strong>Status:</strong> <span>Pending Pickup</span></p>
                         </div>
                     ))}
 
