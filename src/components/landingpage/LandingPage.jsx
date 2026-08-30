@@ -7,18 +7,7 @@ function LandingPage({ isLoggedIn = false, username = "" }) {
 
       return (
         <div>
-            <div className="recentItem">
-                <Link to="/recent-dresses" className="recent-item">
-                    Recent Dresses
-                </Link>
-                {!isLoggedIn && (
-                      <div className="login">
-                        <Link to="/login" className="user-login">
-                            Login
-                        </Link>
-                         </div>
-                    ) }          
-                </div>
+           
 
             <section>
                 <div className="slogan">

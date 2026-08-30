@@ -49,6 +49,19 @@
   width: 100%;           
   margin-top: 0;
 }
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto; /* Pushes everything to the far right */
+}
 
 .nav a {
   text-decoration: none;
@@ -58,11 +71,13 @@
   padding: 6px 12px;
   border-radius: 4px;
   color: #0c7449;
+  width: fit-content;
 }
 
 .nav a:hover {
   color:white;
   background-color: green;
+
 }
 
 .user-session {
