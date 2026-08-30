@@ -153,3 +153,63 @@
   white-space: nowrap; /* Forces text to remain on a single line */
   max-width: none;     /* Removes width limit that causes text wrapping */
 }
+
+/*  Define the Keyframes (The movement instructions) */
+@keyframes dropDown {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popUp {
+  from { opacity: 0; transform: scale(0.8) translateY(30px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Apply animations to existing classes */
+
+/* Slogan drops down from the top smoothly */
+.slogan {
+  animation: dropDown 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Buttons pop up from the bottom with a slight delay */
+.donate {
+  opacity: 0; /* Stays hidden until animation starts */
+  animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0.3s; /* Waits 0.3s after the slogan */
+}
+
+.find {
+  opacity: 0;
+  animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0.5s; /* Waits slightly longer than the donate button */
+}
+
+/* Images pop up one by one */
+.images img {
+  opacity: 0;
+  animation: popUp 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Stagger the images so they load in a wave from left to right */
+.images img:nth-child(1) {
+  animation-delay: 0.6s;
+}
+.images img:nth-child(2) {
+  animation-delay: 0.8s;
+}
+.images img:nth-child(3) {
+  animation-delay: 1.0s;
+}
+
+/* The family text gently fades in last */
+.connect-family {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 1.2s;
+}

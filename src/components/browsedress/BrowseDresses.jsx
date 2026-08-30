@@ -35,11 +35,11 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
         if (typeof onRequestDress === "function") {
             onRequestDress(dress);
         }
-        
+
         setSuccessMessage(`Request sent for: ${dress.itemName || dress.name || "this dress"}`);
     };
 
-   
+
     const safeDresses = Array.isArray(dresses) ? dresses : [];
 
     const filteredDresses = safeDresses.filter((dress) => {
@@ -140,19 +140,19 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                                 <p> <strong>Age:</strong>{dress.age}</p>
                                 <p> <strong>Size:</strong>{dress.size}</p>
                                 <p> <strong>Condition:</strong>{dress.condition}</p>
-                                {isUserLoggedIn ? (
+                                {isUserLoggedIn && (
                                     <Button
                                         type="button"
                                         onClick={() => handleRequestClick(dress)}
-                                        disabled={isRequested || dress.status === "Pending Pickup"} // Disables button when requested
+                                        disabled={isRequested || dress.status === "Pending Pickup"}
                                     >
                                         {isRequested || dress.status === "Pending Pickup"
                                             ? "Requested"
                                             : "Request Dress"}
                                     </Button>
-                                ) : isDonorLoggedIn ? (
-                                    <p className="role-note">Switch to a recipient account to request items.</p>
-                                ) : (
+                                )}
+
+                                {!user && (
                                     <Link to="/user-login" className="login-link">
                                         Login to Request
                                     </Link>

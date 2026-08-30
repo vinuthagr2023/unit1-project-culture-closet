@@ -15,7 +15,7 @@ function Header({ user, onLogout}) {
             <nav className="nav">
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
-                <Link to="/browse-dresses" >BrowseDresses</Link>
+                <Link to="/browse-dresses">BrowseDresses</Link>               
                
              </nav>
 

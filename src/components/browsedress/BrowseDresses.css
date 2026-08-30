@@ -42,6 +42,15 @@
 
 .req-link{
       font-size: 20px;
+      text-align: center;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.req-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
 }
 
 /* Filter Controls */
@@ -126,18 +135,18 @@
 
 .dresses-container h3 {
     font-size: 1.25rem;
-    color: #343a40;
+    color: #190bdf;
     margin: 15px 15px 5px 15px;
 }
 
 .dresses-container p {
     font-size: 0.95rem;
-    color: #495057;
+    color: #e4520e;
     margin: 4px 15px;
 }
 
 .dresses-container p strong {
-    color: #212529;
+    color: #8b0881;
 }
 
 .dresses-container .role-note {
@@ -152,7 +161,7 @@
     display: block;
     margin: 15px;
     text-align: center;
-    background-color: #007bff;
+    background-color: #248507;
     color: white;
     padding: 10px;
     border-radius: 4px;
@@ -162,7 +171,7 @@
 }
 
 .dresses-container .login-link:hover {
-    background-color: #0056b3;
+    background-color: #57e45e;
 }
 
 .dresses-container button {
