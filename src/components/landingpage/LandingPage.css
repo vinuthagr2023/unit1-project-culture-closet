@@ -1,0 +1,215 @@
+.recentItem {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.recent-item {
+
+    color: #1b5e20;
+    font-weight: 600;
+    font-size: large;
+    text-decoration: none;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.recent-item:hover {
+    color: #3a16dd;
+    font-weight: bold;
+}
+
+
+.login-options {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown {
+    background-color: #38e66f;
+    color: black;
+    border: 1px solid #ced4da;
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dropdown:hover {
+    background-color: #ec7317;
+    border-color: #adb5bd;
+}
+
+.dropdown-item-donor,
+.dropdown-item-user {
+  display: inline-block;
+  padding: 6px 12px;
+  color: #126e2d;
+  text-decoration: underline;
+  font-weight: 600;
+  border-radius: 4px;
+  font-size: large;
+}
+
+.dropdown-item-donor:hover {
+  background-color: rgb(144, 193, 240); 
+}
+
+.dropdown-item-user:hover {
+  background-color: rgb(214, 236, 52); 
+}
+
+.slogan {
+  text-align: center;
+  margin: 20px 0 10px 0;
+  margin-top: 0;
+}
+
+.slogan h2 {
+  font-size: 2.5rem;
+  color: #8528db;
+  font-weight: 700;
+  margin: 0;
+}
+
+.categeries {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  margin-top: 0;
+}
+
+.donate,
+.find {
+  display: block;
+  width: 320px;           /* Makes the box wider */
+  padding: 18px 36px;     /* Makes the box taller and roomier (top/bottom left/right) */
+  font-size: 1.25rem;     /* Increases text size to ~20px */
+  border-radius: 8px;     /* Slightly rounded corners to match larger scale */
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.donate {
+  background-color: #2dda5b;
+  color:black;
+  font-size: 25px;
+}
+
+.donate:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.25);
+}
+
+.find {
+  background-color: #007bff;
+  color:black;
+  font-size: 25px;
+  white-space: nowrap;
+}
+
+.find:hover {
+  background-color: #0069d9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.25);
+}
+
+.images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+  margin-top: 0;
+}
+
+.images img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.images img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.connect-family {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: #da5a33;
+  margin: 15px auto;
+  white-space: nowrap; /* Forces text to remain on a single line */
+  max-width: none;     /* Removes width limit that causes text wrapping */
+}
+
+/*  Define the Keyframes (The movement instructions) */
+@keyframes dropDown {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popUp {
+  from { opacity: 0; transform: scale(0.8) translateY(30px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Apply animations to existing classes */
+
+/* Slogan drops down from the top smoothly */
+.slogan {
+  animation: dropDown 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Buttons pop up from the bottom with a slight delay */
+.donate {
+  opacity: 0; /* Stays hidden until animation starts */
+  animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0.3s; /* Waits 0.3s after the slogan */
+}
+
+.find {
+  opacity: 0;
+  animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0.5s; /* Waits slightly longer than the donate button */
+}
+
+/* Images pop up one by one */
+.images img {
+  opacity: 0;
+  animation: popUp 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Stagger the images so they load in a wave from left to right */
+.images img:nth-child(1) {
+  animation-delay: 0.6s;
+}
+.images img:nth-child(2) {
+  animation-delay: 0.8s;
+}
+.images img:nth-child(3) {
+  animation-delay: 1.0s;
+}
+
+/* The family text gently fades in last */
+.connect-family {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 1.2s;
+}

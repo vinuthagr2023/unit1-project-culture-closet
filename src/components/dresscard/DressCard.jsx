@@ -1,4 +1,6 @@
 import React from "react";
+import "./DressCard.css";
+
 function DressCard({ dress }) {
     if(!dress)return null;
     return (

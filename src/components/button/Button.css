@@ -1,0 +1,39 @@
+.reusable-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #2e7d32;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+/* Hover & Active States */
+.reusable-btn:hover:not(:disabled) {
+  background-color: #1b5e20;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.reusable-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Accessibility Focus State */
+.reusable-btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.35);
+}
+
+/* Disabled State */
+.reusable-btn:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}

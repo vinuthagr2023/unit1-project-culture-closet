@@ -1,0 +1,269 @@
+/* BrowseDresses.css */
+
+.browse-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.browse-container h2 {
+    font-size: 2rem;
+    color: orangered;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Notification Banners */
+.warning-banner {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.success-banner {
+    background-color: #e2d739;
+    width: fit-content;
+    color: #0c10db;
+    font-size: 20px;
+    padding: 12px 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.req-link{
+      font-size: 20px;
+      text-align: center;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.req-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Filter Controls */
+.filter-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    background-color: #afceec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.filter-controls input[type="text"] {
+    flex: 1;
+    min-width: 240px;
+    padding: 10px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.filter-controls input[type="text"]:focus {
+    border-color: #007bff;
+}
+.filter-controls select {
+    padding: 10px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.filter-controls select:focus {
+    border-color: #007bff;
+}
+
+.dresses-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.dresses-container > div {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dresses-container > div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+.dresses-container img {
+   width: 50%;
+  height: auto; 
+    object-fit: cover;
+    background-color: #e9ecef;
+}
+
+.dresses-container span {
+    display: block;
+    width: 100%;
+    height: 220px;
+    background-color: #e9ecef;
+    color: #6c757d;
+    text-align: center;
+    line-height: 220px;
+    font-size: 0.95rem;
+}
+
+.dresses-container h3 {
+    font-size: 1.25rem;
+    color: #190bdf;
+    margin: 15px 15px 5px 15px;
+}
+
+.dresses-container p {
+    font-size: 0.95rem;
+    color: #e4520e;
+    margin: 4px 15px;
+}
+
+.dresses-container p strong {
+    color: #8b0881;
+}
+
+.dresses-container .role-note {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-style: italic;
+    margin: 15px;
+    text-align: center;
+}
+
+.dresses-container .login-link {
+    display: block;
+    margin: 15px;
+    text-align: center;
+    background-color: #248507;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.dresses-container .login-link:hover {
+    background-color: #57e45e;
+}
+
+.dresses-container button {
+    margin: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    background-color: #28a745;
+    color: black;
+    transition: background-color 0.2s;
+}
+
+.dresses-container button:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+.dresses-container button:disabled {
+    background-color: #d4a817;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+/* Breakpoint 1: Tablets and smaller screens (768px and below) */
+@media (max-width: 768px) {
+    .browse-container {
+        padding: 20px 15px;
+    }
+
+    .browse-container h2 {
+        font-size: 1.75rem;
+    }
+
+    /* Stack filter controls vertically */
+    .filter-controls {
+        flex-direction: column;
+        padding: 15px;
+        gap: 10px;
+    }
+    
+    .filter-controls input[type="text"],
+    .filter-controls select {
+        width: 100%;
+        min-width: 100%; /* Overrides the 240px min-width from desktop */
+    }
+
+    /* Slightly reduce the gap between cards */
+    .dresses-container {
+        gap: 15px;
+    }
+    
+    /* Make the image take up more of the card on smaller screens 
+       since 50% might look too narrow on a tablet */
+    .dresses-container img {
+        width: 100%; 
+        height: 250px;
+    }
+}
+
+/* Breakpoint 2: Mobile phones (480px and below) */
+@media (max-width: 480px) {
+    .browse-container {
+        padding: 15px 10px;
+    }
+
+    .browse-container h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .success-banner, 
+    .warning-banner {
+        font-size: 16px;
+        padding: 10px 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .req-link {
+        font-size: 16px;
+    }
+
+    /* Force the grid into a strict single column for small phones */
+    .dresses-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .dresses-container h3 {
+        font-size: 1.15rem;
+    }
+}
+

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Button from "../button/Button";
+import "./BrowseDresses.css";
 
 function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDress }) {
     const isUserLoggedIn = user?.role === "user";
@@ -10,6 +12,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
     const [selectedAge, setSelectedAge] = useState("all");
     const [loginWarning, setLoginWarning] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const [requestedIds, setRequestedIds] = useState([]);
 
     // Automatically clear warning whenever user logs in
     useEffect(() => {
@@ -26,14 +29,16 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
             return;
         }
         setLoginWarning("");
+        setRequestedIds((prev) => [...prev, dress.id]);
 
         // Call parent handler if passed
         if (typeof onRequestDress === "function") {
             onRequestDress(dress);
         }
-        ale
+
         setSuccessMessage(`Request sent for: ${dress.itemName || dress.name || "this dress"}`);
     };
+
 
     const safeDresses = Array.isArray(dresses) ? dresses : [];
 
@@ -56,8 +61,8 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
     });
 
     return (
-        <div>
-            <h2> Browse Cultural outfits </h2>
+        <div className="browse-container">
+            <h2> Browse Cultural Outfits </h2>
             {/* Render Login Warning Banner */}
             {!user && loginWarning && (
                 <div className="warning-banner" >
@@ -79,7 +84,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
             )}
 
             {user?.role === "user" && (
-                <div style={{ marginBottom: "15px" }}>
+                <div className="req-link" style={{ marginBottom: "15px" }}>
                     <Link to="/my-requests">
                         View My Requested dresses
                     </Link>
@@ -135,19 +140,21 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                                 <p> <strong>Age:</strong>{dress.age}</p>
                                 <p> <strong>Size:</strong>{dress.size}</p>
                                 <p> <strong>Condition:</strong>{dress.condition}</p>
-                                {isUserLoggedIn ? (
-                                    <button
+                                {isUserLoggedIn && (
+                                    <Button
                                         type="button"
                                         onClick={() => handleRequestClick(dress)}
-                                        disabled={isRequested} // Disables button when requested
+                                        disabled={isRequested || dress.status === "Pending Pickup"}
                                     >
-                                        {dress.status === "Pending Pickup" ? "Pending Pickup" : "Request Dress"}
-                                    </button>
-                                ) : isDonorLoggedIn ? (
-                                    <p className="role-note">Switch to a recipient account to request items.</p>
-                                ) : (
+                                        {isRequested || dress.status === "Pending Pickup"
+                                            ? "Requested"
+                                            : "Request Dress"}
+                                    </Button>
+                                )}
+
+                                {!user && (
                                     <Link to="/user-login" className="login-link">
-                                        Login as User to Request
+                                        Login to Request
                                     </Link>
                                 )}
                             </div>

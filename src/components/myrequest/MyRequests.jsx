@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
+import "./MyRequests.css";
+
 function MyRequests({ requestedDresses = [],user }) {
     // Display link to login if user is logged out
     if (!user) {
         return (
             <div className="my-request-container">
                 <h2>My Requested Outfits</h2>
-                <p>Please log in to view your requested dresses.</p>
+                <p id="log-req" >Please log in to view your requested dresses.</p>
                 <Link to="/user-login">
                     Click here for User Login
                 </Link>
@@ -17,7 +19,7 @@ function MyRequests({ requestedDresses = [],user }) {
         <div className="my-request-container">
             <h2>My Requested Dress Details</h2>
            {requestedDresses.length === 0 ? (
-        <div>
+        <div className="not-req" >
           <p>You have not requested any dresses yet.</p>
           <Link 
             to="/browse-dresses" 
@@ -44,7 +46,7 @@ function MyRequests({ requestedDresses = [],user }) {
                             <p><strong>Age:</strong> {dress.age}</p>
                             <p><strong>Size:</strong> {dress.size}</p>
                             <p><strong>Condition:</strong> {dress.condition}</p>
-                            <p><strong>Status:</strong> <span style={{ color: "#e67e22", fontWeight: "bold" }}>Pending Pickup</span></p>
+                            <p><strong>Status:</strong> <span>Pending Pickup</span></p>
                         </div>
                     ))}
 

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import DressCard from "./DressCard";
+import DressCard from "../dresscard/DressCard";
+import "./RecentDresses.css";
 
 function RecentDresses({ dresses }) {
     return (
-        <div>
+        <div className="recent-container">
             <h2> Recent dresses </h2>
             <section className="recentItem">
               

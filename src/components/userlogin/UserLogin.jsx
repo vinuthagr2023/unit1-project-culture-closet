@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import AddDress from "./AddDress";
+import "./UserLogin.css";
 
-function DonorLogin({onLogin}) {
+
+
+function UserLogin({onLogin}){
     const [usernameInput,setUsernameInput] = useState("");
     const [formData, setFormData] = useState({
         name: "",
@@ -30,14 +32,14 @@ function DonorLogin({onLogin}) {
         }
         // Pass validated name to parent state
         if(typeof onLogin==="function"){
-            onLogin({ name, email, role: "donor" });
+            onLogin({ name, email, role: "user" });
         }
     };
 
 
     return (
         <div className="login-container">
-            <h2> Donor Login </h2>
+            <h2> User Login </h2>
             <form onSubmit={(e)=>e.preventDefault()}>
                 <label> Usename:
                     <input type="text" name="name" value={formData.name} onChange={handleChange}
@@ -50,7 +52,7 @@ function DonorLogin({onLogin}) {
                     required/>
                 </label><br/>
           
-                <Link to="/add-dress" onClick={handleLoginClick} className="Dlogin-button">
+                <Link to="/browse-dresses" onClick={handleLoginClick} className="Ulogin-button">
                     Login
                 </Link>
             </form> 
@@ -58,4 +60,4 @@ function DonorLogin({onLogin}) {
     );
 }
 
-export default DonorLogin;
+export default UserLogin;

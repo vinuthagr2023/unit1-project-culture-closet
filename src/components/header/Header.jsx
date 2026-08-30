@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./Header.css";
 
 function Header({ user, onLogout}) {  
     const isLoggedIn = Boolean(user);
@@ -8,13 +9,13 @@ function Header({ user, onLogout}) {
         <header className="main-header">
             <div className="header-brand">
                 <h1 className="title">Culture Closet</h1>
-                <div className="logo">Heritage kids</div>
+                <h2 className="logo">Heritage kids</h2>
             </div>
 
             <nav className="nav">
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
-                <Link to="/browse-dresses" >BrowseDresses</Link>
+                <Link to="/browse-dresses">BrowseDresses</Link>               
                
              </nav>
 

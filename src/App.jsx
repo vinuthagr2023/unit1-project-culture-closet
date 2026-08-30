@@ -1,16 +1,17 @@
 import { useState } from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link ,Navigate,useNavigate} from 'react-router-dom'
 import './App.css'
-import LandingPage from './components/LandingPage'
-import DonorLogin from './components/DonorLogin'
-import UserLogin from './components/UserLogin'
-import AboutPage from './components/AboutPage'
-import RecentDresses from './components/RecentDresses'
-import AddDress from './components/AddDress'
-import BrowseDresses from './components/BrowseDresses'
+import LandingPage from './components/landingpage/LandingPage'
+import DonorLogin from './components/donorlogin/DonorLogin'
+import UserLogin from './components/userlogin/UserLogin'
+import AboutPage from './components/about/AboutPage'
+import RecentDresses from './components/recentdresses/RecentDresses'
+import AddDress from './components/adddress/AddDress'
+import BrowseDresses from './components/browsedress/BrowseDresses'
 import initialDressList from './data/mockData'
-import Header from './components/Header'
-import MyRequests from './components/MyRequests'
+import Header from './components/header/Header'
+import MyRequests from './components/myrequest/MyRequests'
+import Footer from './components/footer/Footer'
 
 
 
@@ -18,6 +19,8 @@ function App() {
   const [dressList, setDressList] = useState(initialDressList);
   const [user, setUser] = useState(null); // tracks logged in username
   const [requestedDresses, setRequestedDresses] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleDonorLogin = (userData) => {
     setUser({ ...userData, role: "donor" });
@@ -34,10 +37,12 @@ function App() {
   const handleLogout = () => {
     setUser(null);
     setRequestedDresses([]);
+    navigate("/");
   };
   const handleAddDress = (newDress) => {
     setDressList((prevList) => [newDress, ...prevList]);
   };
+
   //Handler function to append new requests
   const handleRequestDress = (dress) => {
     setRequestedDresses((prevRequests) => {
@@ -48,6 +53,10 @@ function App() {
       return prevRequests;
     });
   };
+
+  const handleDeleteDress = (idToDelete) => {
+  setDressList((prevDresses) => prevDresses.filter((dress) => Number(dress.id) !== Number(idToDelete)));
+};
 
   return (
     <div className='app-container'>
@@ -63,12 +72,15 @@ function App() {
           isLoggedIn={isLoggedIn}
            isDonorLoggedIn={isDonorLoggedIn}
            isUserLoggedIn={isUserLoggedIn}
-            username={user} />} />
+            username={user}/>} />
           <Route path="/about" element={<AboutPage />} />
           <Route path='/recent-dresses' element={<RecentDresses dresses={dressList} />} />
-          <Route path="/donor-login" element={<DonorLogin onLogin={handleDonorLogin} />} />
-          <Route path="/user-login" element={<UserLogin onLogin={handleUserLogin} user={user} />} />
-          <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user} />} />
+          <Route path="/donor-login"
+          element={isLoggedIn ? <Navigate to="/add-dress" replace /> : <DonorLogin onLogin={handleDonorLogin} />} />
+          <Route path="/user-login" 
+          element={isLoggedIn ? <Navigate to="/browse-dresses" replace /> 
+            : <UserLogin onLogin={handleUserLogin} />}/>
+          <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user} onDeleteDress={handleDeleteDress} dresses={dressList} />} />
           <Route path="/browse-dresses"
             element={<BrowseDresses dresses={dressList} user={user}
               requestedDresses={requestedDresses}
@@ -80,13 +92,9 @@ function App() {
           />
         </Routes>
       </main>
-
-      <footer className="footer">
-
-        <p>---------Spread tradition to others-------------</p>
-
-      </footer>
-
+        
+        <Footer/>
+      
     </div>
 
   )
