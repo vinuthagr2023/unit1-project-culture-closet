@@ -20,45 +20,6 @@
 }
 
 
-.login-options {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown {
-    background-color: #38e66f;
-    color: black;
-    border: 1px solid #ced4da;
-    padding: 8px 16px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.dropdown:hover {
-    background-color: #ec7317;
-    border-color: #adb5bd;
-}
-
-.dropdown-item-donor,
-.dropdown-item-user {
-  display: inline-block;
-  padding: 6px 12px;
-  color: #126e2d;
-  text-decoration: underline;
-  font-weight: 600;
-  border-radius: 4px;
-  font-size: large;
-}
-
-.dropdown-item-donor:hover {
-  background-color: rgb(144, 193, 240); 
-}
-
-.dropdown-item-user:hover {
-  background-color: rgb(214, 236, 52); 
-}
 
 .slogan {
   text-align: center;

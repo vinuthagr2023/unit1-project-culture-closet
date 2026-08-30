@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
 
-function Header({ user, onLogout}) {  
+function Header({ user, onLogout }) {  
     const isLoggedIn = Boolean(user);
     const displayName = typeof user === "object" ? user?.name : user;
     
@@ -15,9 +15,9 @@ function Header({ user, onLogout}) {
             <nav className="nav">
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
-                <Link to="/browse-dresses">BrowseDresses</Link>               
-               
-             </nav>
+                <Link to="/browse-dresses">BrowseDresses</Link>   
+                <Link to={isLoggedIn ? "/add-dress": "/login"}>DonateDresses</Link> 
+            </nav>
 
             {/* User Session Info */}
             {isLoggedIn && (

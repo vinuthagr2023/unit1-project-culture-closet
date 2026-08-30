@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { Routes, Route, Link ,Navigate,useNavigate} from 'react-router-dom'
+import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom'
 import './App.css'
 import LandingPage from './components/landingpage/LandingPage'
-import DonorLogin from './components/donorlogin/DonorLogin'
-import UserLogin from './components/userlogin/UserLogin'
+import LoginPage from './components/login/LoginPage'
 import AboutPage from './components/about/AboutPage'
 import RecentDresses from './components/recentdresses/RecentDresses'
 import AddDress from './components/adddress/AddDress'
@@ -22,17 +21,11 @@ function App() {
 
   const navigate = useNavigate();
 
-  const handleDonorLogin = (userData) => {
-    setUser({ ...userData, role: "donor" });
+  const handleLogin = (userData) => {
+    setUser({userData});
   };
 
-  const handleUserLogin = (userData) => {
-    setUser({ ...userData, role: "user" });
-  };
   const isLoggedIn = Boolean(user);
-  const isDonorLoggedIn = user?.role === "donor";
-  const isUserLoggedIn = user?.role === "user";
-
 
   const handleLogout = () => {
     setUser(null);
@@ -55,31 +48,28 @@ function App() {
   };
 
   const handleDeleteDress = (idToDelete) => {
-  setDressList((prevDresses) => prevDresses.filter((dress) => Number(dress.id) !== Number(idToDelete)));
-};
+    setDressList((prevDresses) => prevDresses.filter((dress) => Number(dress.id) !== Number(idToDelete)));
+  };
 
   return (
     <div className='app-container'>
-      <Header isLoggedIn={isLoggedIn}
-        isDonorLoggedIn={isDonorLoggedIn}
-        isUserLoggedIn={isUserLoggedIn}
+      <Header
+        isLoggedIn={isLoggedIn}
         user={user}
-        onLogout={handleLogout} />
+        onLogout={handleLogout}
+      />
 
       <main>
         <Routes>
-          <Route path="/" element={<LandingPage 
-          isLoggedIn={isLoggedIn}
-           isDonorLoggedIn={isDonorLoggedIn}
-           isUserLoggedIn={isUserLoggedIn}
-            username={user}/>} />
+          <Route path="/" element={<LandingPage isLoggedIn={isLoggedIn} username={user} />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/login" element={isLoggedIn ? (
+            <Navigate to="/" replace />
+          ) : (
+            <LoginPage onLogin={handleLogin} />
+          )
+          } />
           <Route path='/recent-dresses' element={<RecentDresses dresses={dressList} />} />
-          <Route path="/donor-login"
-          element={isLoggedIn ? <Navigate to="/add-dress" replace /> : <DonorLogin onLogin={handleDonorLogin} />} />
-          <Route path="/user-login" 
-          element={isLoggedIn ? <Navigate to="/browse-dresses" replace /> 
-            : <UserLogin onLogin={handleUserLogin} />}/>
           <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user} onDeleteDress={handleDeleteDress} dresses={dressList} />} />
           <Route path="/browse-dresses"
             element={<BrowseDresses dresses={dressList} user={user}
@@ -92,9 +82,9 @@ function App() {
           />
         </Routes>
       </main>
-        
-        <Footer/>
-      
+
+      <Footer />
+
     </div>
 
   )

@@ -23,10 +23,10 @@ function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
         imageUrl: ""
     });
 
-    const isDonor = user?.role === "donor";
+   
     // Clear all local states when the user logs out
     useEffect(() => {
-        if (isDonor) {
+        if (user) {
             setShowForm(false);
             setLoginWarning("");
         }
@@ -37,7 +37,7 @@ function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
             setErrorMessage("");
             setShowForm(false);
         }
-    }, [user, isDonor]);
+    }, [user]);
 
     const isFormValid = Boolean(
         formData.itemName.trim() &&
@@ -124,7 +124,7 @@ function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
             <h2> Donor Portal</h2>
             {loginWarning && (
                 <p>{loginWarning}
-                    <Link to="/donor-login">Click here to Login</Link>
+                    <Link to="/login">Click here to Login</Link>
                 </p>
             )}
              {errorMessage && (

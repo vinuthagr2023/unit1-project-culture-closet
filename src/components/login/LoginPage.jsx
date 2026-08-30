@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./DonorLogin.css";
+import "./LoginPage.css";
 
-function DonorLogin({ onLogin }) {
+function LoginPage({ onLogin }) {
     // const [usernameInput,setUsernameInput] = useState("");
     const [formData, setFormData] = useState({
         name: "",
@@ -29,23 +29,20 @@ function DonorLogin({ onLogin }) {
         }
 
         if (!name || !email) {
-            if (e && typeof e.preventDefault === "function") {
-                e.preventDefault();
-            }
             alert("Please fill out both Name and Email!");
             return;
         }
         // Pass validated name to parent state
         if (typeof onLogin === "function") {
-            onLogin({ name, email, role: "donor" });
+            onLogin({ name, email });
         }
-        navigate("/add-dress");
+        navigate("/");
     };
 
 
     return (
         <div className="login-container">
-            <h2> Donor Login </h2>
+            <h2> User Login </h2>
             <form onSubmit={handleLoginClick}>
                 <label> Usename:
                     <input type="text" name="name" value={formData.name} onChange={handleChange}
@@ -66,4 +63,4 @@ function DonorLogin({ onLogin }) {
     );
 }
 
-export default DonorLogin;
+export default LoginPage;

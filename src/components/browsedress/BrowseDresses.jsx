@@ -5,8 +5,7 @@ import "./BrowseDresses.css";
 
 function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDress }) {
     const isUserLoggedIn = user?.role === "user";
-    const isDonorLoggedIn = user?.role === "donor";
-
+    
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGender, setSelectedGender] = useState("all");
     const [selectedAge, setSelectedAge] = useState("all");
@@ -68,10 +67,10 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                 <div className="warning-banner" >
                     <span>{loginWarning} </span>
                     <Link
-                        to="/user-login"
+                        to="/login"
                         style={{ fontWeight: "bold", color: "#721c24", textDecoration: "underline" }}
                     >
-                        Click here for User Login
+                        Click here for Login
                     </Link>
                 </div>
             )}
@@ -83,7 +82,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                 </div>
             )}
 
-            {user?.role === "user" && (
+            {user && (
                 <div className="req-link" style={{ marginBottom: "15px" }}>
                     <Link to="/my-requests">
                         View My Requested dresses
@@ -140,7 +139,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                                 <p> <strong>Age:</strong>{dress.age}</p>
                                 <p> <strong>Size:</strong>{dress.size}</p>
                                 <p> <strong>Condition:</strong>{dress.condition}</p>
-                                {isUserLoggedIn && (
+                                {isLoggedIn && (
                                     <Button
                                         type="button"
                                         onClick={() => handleRequestClick(dress)}
@@ -153,7 +152,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                                 )}
 
                                 {!user && (
-                                    <Link to="/user-login" className="login-link">
+                                    <Link to="/login" className="login-link">
                                         Login to Request
                                     </Link>
                                 )}
