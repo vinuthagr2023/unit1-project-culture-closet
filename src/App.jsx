@@ -22,7 +22,7 @@ function App() {
   const navigate = useNavigate();
 
   const handleLogin = (userData) => {
-    setUser({userData});
+    setUser(userData);
   };
 
   const isLoggedIn = Boolean(user);

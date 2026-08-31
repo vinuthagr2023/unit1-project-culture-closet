@@ -18,11 +18,11 @@ function Header({ user, onLogout }) {
                     <Link to="/about">About</Link>
                     <Link to="/browse-dresses">BrowseDresses</Link>
                     <Link to={isLoggedIn ? "/add-dress" : "/login"}>DonateDresses</Link>
-                </div>
-                <div className="nav-right">
-                    <Link to="/recent-dresses" className="recent-item">
+                     <Link to="/recent-dresses" className="recent-item">
                         Recent Dresses
                     </Link>
+                </div>
+                <div className="nav-right">                   
                     {!isLoggedIn && (
                         <div className="login">
                             <Link to="/login" className="user-login">
@@ -30,8 +30,7 @@ function Header({ user, onLogout }) {
                             </Link>
                         </div>
                     )}
-                </div>
-            </nav>
+            
 
             {/* User Session Info */}
             {isLoggedIn && (
@@ -40,6 +39,8 @@ function Header({ user, onLogout }) {
                     <button type="button" onClick={onLogout}>Logout</button>
                 </div>
             )}
+                </div>
+            </nav>
         </header>
 
     );

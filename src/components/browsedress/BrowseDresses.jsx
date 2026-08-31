@@ -4,7 +4,7 @@ import Button from "../button/Button";
 import "./BrowseDresses.css";
 
 function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDress }) {
-    const isUserLoggedIn = user?.role === "user";
+    const isLoggedIn = Boolean(user);
     
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGender, setSelectedGender] = useState("all");
