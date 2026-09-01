@@ -12,7 +12,7 @@
 
 .about-title {
   color: #e7370b;
-  font-size: 1.6rem;
+  font-size: 25px;
   margin-top: 0;
   margin-bottom: 12px;
   text-align: center;
@@ -21,7 +21,7 @@
 
 .about-subtitle {
   color: #05720c;
-  font-size: 1.2rem;
+  font-size: 20px;
   margin-top: 20px;
   margin-bottom: 8px;
   font-weight: 600;
@@ -44,10 +44,10 @@
   }
 
   .about-title {
-    font-size: 1.3rem;
+    font-size: 25px;
   }
 
   .about-subtitle {
-    font-size: 1.05rem;
+    font-size: 20px;
   }
 }

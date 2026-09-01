@@ -20,9 +20,6 @@ function AddDress({ onAddDress, onDeleteDress, onUpdateDress, user, dresses }) {
         !dress.donor
     );
 
-    console.log("Logged-in User Object:", user);
-    console.log("All Dresses in App:", dresses);
-
     const [formData, setFormData] = useState({
         itemName: '',
         traditionStyle: '',
@@ -200,8 +197,7 @@ function AddDress({ onAddDress, onDeleteDress, onUpdateDress, user, dresses }) {
                         <input type="file" accept="image/*" onChange={(e) => {
                             const file = e.target.files[0];
                             if (file) {
-                                // Converts local computer file into a viewable browser URL
-                                const localImageUrl = URL.createObjectURL(file);
+                                 const localImageUrl = URL.createObjectURL(file);
                                 setFormData((prev) => ({
                                     ...prev,
                                     imageUrl: localImageUrl,
@@ -234,7 +230,7 @@ function AddDress({ onAddDress, onDeleteDress, onUpdateDress, user, dresses }) {
                             <p><strong>Size:</strong>{dress.size}</p>
                             {dress.status === "Not Available" ? (
                                 <div style={{ color: "#d9534f", fontWeight: "bold", margin: "10px 0" }}>
-                                    ❌ Marked as Not Available
+                                    ❌ Not Available
                                 </div>
                             ) : dress.isRequested ? (
                                         <div style={{ margin: "10px 0" }}>

@@ -93,7 +93,7 @@
   background-color: #f4f4f4;
 }
 
-/* Fallback span when no image is provided */
+
 .dress-card > span:first-child {
   display: flex;
   align-items: center;

@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import "./MyRequests.css";
 
 function MyRequests({ requestedDresses = [], user, dresses = [] }) {
-    // Display link to login if user is logged out
-    if (!user) {
+       if (!user) {
         return (
             <div className="my-request-container">
                 <h2>My Requested Outfits</h2>
@@ -57,7 +56,7 @@ function MyRequests({ requestedDresses = [], user, dresses = [] }) {
                             <strong>Status:</strong>{" "}
                             {liveDress.status === "Not Available" ? (
                                 <span style={{ color: "#d9534f", fontWeight: "bold" }}>
-                                    ❌ Marked as Not Available
+                                    ❌ Not Available
                                 </span>
                             ) : liveDress.isClaimed ? (
                                 <span style={{ color: "#d9534f", fontWeight: "bold" }}>

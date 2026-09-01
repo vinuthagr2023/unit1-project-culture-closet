@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-//import initialDressList from "../../data/mockData";
 import "./LandingPage.css";
 
 function LandingPage({ isLoggedIn = false, username = "" }) {

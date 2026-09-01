@@ -51,7 +51,7 @@ function LoginPage({ onLogin }) {
                 </label><br />
                 <label> Email:
                     <input type="email" name="email" value={formData.email} onChange={handleChange}
-                        placeholder="Enter your email"
+                        placeholder="Enter your email" title="example: name@example.com"
                         required />
                 </label><br />
                 <button type="submit" className="Dlogin-button">

@@ -1,6 +1,4 @@
-/* ==========================================
-   DONOR PORTAL / ADD DRESS STYLES (SINGLE-PAGE COMPACT)
-   ========================================== */
+
 
 .add-dress-container {
   max-width: 650px;
@@ -59,7 +57,7 @@
   transform: translateY(-2px);
 }
 
-/* 2-Column Ultra-Compact Grid Form */
+
 .add-dress-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -196,7 +194,7 @@
 }
 
 .dress-preview-card {
-  flex: 1 1 calc(50% - 14px); /* 2 items per row on desktop */
+  flex: 1 1 calc(50% - 14px); 
   min-width: 180px;
   background-color: #ffffff;
   border: 1px solid #370ba6;
@@ -213,13 +211,13 @@
 
 .dress-preview-card img {
   width: 50%;
-  height: auto;           /* Allows image to scale naturally */
-  max-height: 160px;      /* Prevents large photos from growing too tall */
-  object-fit: contain;    /* Displays the full image without cropping */
+  height: auto;           
+  max-height: 160px;      
+  object-fit: contain;    
   border-radius: 6px;
   margin-bottom: 8px;
   border: 1px solid #f0f0f0;
-  background-color: #f8f9fa; /* Fills empty space if photo aspect ratio differs */
+  background-color: #f8f9fa; 
 }
 
 /* Card Text Spacing */

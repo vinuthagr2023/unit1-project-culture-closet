@@ -46,10 +46,10 @@
 .donate,
 .find {
   display: block;
-  width: 320px;           /* Makes the box wider */
-  padding: 18px 36px;     /* Makes the box taller and roomier (top/bottom left/right) */
-  font-size: 1.25rem;     /* Increases text size to ~20px */
-  border-radius: 8px;     /* Slightly rounded corners to match larger scale */
+  width: 320px;           
+  padding: 18px 36px;     
+  font-size: 1.25rem;     
+  border-radius: 8px;     
   font-weight: 700;
   text-decoration: none;
   text-align: center;
@@ -111,8 +111,8 @@
   font-weight: bold;
   color: #da5a33;
   margin: 15px auto;
-  white-space: nowrap; /* Forces text to remain on a single line */
-  max-width: none;     /* Removes width limit that causes text wrapping */
+  white-space: nowrap; 
+  max-width: none;     
 }
 
 /*  Define the Keyframes (The movement instructions) */
@@ -133,22 +133,22 @@
 
 /* Apply animations to existing classes */
 
-/* Slogan drops down from the top smoothly */
+
 .slogan {
   animation: dropDown 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* Buttons pop up from the bottom with a slight delay */
+
 .donate {
-  opacity: 0; /* Stays hidden until animation starts */
+  opacity: 0; 
   animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  animation-delay: 0.3s; /* Waits 0.3s after the slogan */
+  animation-delay: 0.3s; 
 }
 
 .find {
   opacity: 0;
   animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  animation-delay: 0.5s; /* Waits slightly longer than the donate button */
+  animation-delay: 0.5s; 
 }
 
 /* Images pop up one by one */

@@ -6,7 +6,7 @@
     padding: 30px 20px;
 }
 
-.browse-container h2 {
+.browse-container h1 {
     font-size: 2rem;
     color: orangered;
     margin-bottom: 20px;
@@ -109,8 +109,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Pushes the button/links to the bottom evenly */
-    height: 100%; /* Forces every card to fill its grid cell completely */
+    justify-content: space-between; 
+    height: 100%; 
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -207,7 +207,7 @@
         padding: 20px 15px;
     }
 
-    .browse-container h2 {
+    .browse-container h1 {
         font-size: 1.75rem;
     }
 
@@ -242,7 +242,7 @@
         padding: 15px 10px;
     }
 
-    .browse-container h2 {
+    .browse-container h1 {
         font-size: 1.5rem;
         margin-bottom: 15px;
     }
@@ -266,8 +266,9 @@
         gap: 15px;
     }
 
-    .dresses-container h3 {
+    .dresses-container h3{
         font-size: 1.15rem;
     }
+
 }
 

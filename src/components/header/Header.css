@@ -6,8 +6,8 @@
   justify-content: center;
   width: 100%;
   box-sizing: border-box;
-  background-color: rgba(169, 233, 67, 0.911);
- border: 4px solid green;
+  background-color: rgba(114, 237, 118, 0.911);
+ border: 4px solid rgb(231, 97, 13);
   border-radius: 0; 
  padding: 4px 20px;
   margin: 0;
@@ -26,9 +26,9 @@
 
 
 .header-brand .logo {
-  font-size: 13px;
+  font-size: 20px;
   font-weight: 600;
-  color: #e1660e; 
+  color: #3f0ee1; 
   margin: 2px 0 0 0;
   letter-spacing: 1px;
   text-decoration: underline;
@@ -44,7 +44,8 @@
   margin-top: 10px; 
   margin-bottom: 15px;
   flex-wrap: wrap;
-}
+ }
+
 .nav-left {
   display: flex;
   align-items: center;
@@ -61,12 +62,11 @@
 
 .nav a {
   text-decoration: none;
-  color: #495057;
+  color: rgb(118, 7, 126);
   font-weight: 600;
   font-size: 20px;
   padding: 6px 12px;
   border-radius: 4px;
-  color: #0c7449;
   width: fit-content;
 }
 

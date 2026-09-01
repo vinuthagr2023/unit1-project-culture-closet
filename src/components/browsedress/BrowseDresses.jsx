@@ -61,7 +61,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
 
     return (
         <div className="browse-container">
-            <h2> Browse Cultural Outfits </h2>
+            <h1> Browse Cultural Outfits </h1>
             {/* Render Login Warning Banner */}
             {!user && loginWarning && (
                 <div className="warning-banner" >
@@ -116,7 +116,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
             </div>
 
             {filteredDresses.length === 0 ? (
-                <p>No dresses match your search criteria.</p>
+                <h2>No dresses match your search criteria.</h2>
             ) : (
                 <div className="dresses-container">
                     {filteredDresses.map((dress, index) => {
@@ -141,7 +141,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                                 <p> <strong>Condition:</strong>{dress.condition}</p>
                                 {dress.status === "Not Available" ? (
                                     <div style={{ color: "#d9534f", fontWeight: "bold", margin: "10px 0" }}>
-                                        ❌ Marked as Not Available
+                                        ❌ Not Available
                                     </div>
                                 ) : dress.isClaimed ? (
                                 <div style={{ color: "#d9534f", fontWeight: "bold", margin: "10px 0" }}>

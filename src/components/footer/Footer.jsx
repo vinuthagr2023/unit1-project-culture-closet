@@ -4,7 +4,7 @@ function Footer(){
 
 <footer className="footer">
 
-        <p>---------Spread tradition to others-------------</p>
+        <p className="moving-text">---------Spread tradition to others-------------</p>
 
       </footer>
     );
