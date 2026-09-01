@@ -5,7 +5,7 @@ import "./BrowseDresses.css";
 
 function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDress }) {
     const isLoggedIn = Boolean(user);
-    
+
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGender, setSelectedGender] = useState("all");
     const [selectedAge, setSelectedAge] = useState("all");
@@ -32,7 +32,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
 
         // Call parent handler if passed
         if (typeof onRequestDress === "function") {
-            onRequestDress(dress);
+            onRequestDress(dress.id, user);
         }
 
         setSuccessMessage(`Request sent for: ${dress.itemName || dress.name || "this dress"}`);
@@ -139,23 +139,41 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                                 <p> <strong>Age:</strong>{dress.age}</p>
                                 <p> <strong>Size:</strong>{dress.size}</p>
                                 <p> <strong>Condition:</strong>{dress.condition}</p>
-                                {isLoggedIn && (
-                                    <Button
-                                        type="button"
-                                        onClick={() => handleRequestClick(dress)}
-                                        disabled={isRequested || dress.status === "Pending Pickup"}
-                                    >
-                                        {isRequested || dress.status === "Pending Pickup"
-                                            ? "Requested"
-                                            : "Request Dress"}
-                                    </Button>
+                                {dress.status === "Not Available" ? (
+                                    <div style={{ color: "#d9534f", fontWeight: "bold", margin: "10px 0" }}>
+                                        ❌ Marked as Not Available
+                                    </div>
+                                ) : dress.isClaimed ? (
+                                <div style={{ color: "#d9534f", fontWeight: "bold", margin: "10px 0" }}>
+                                    🔒 Claimed / Not Available
+                                </div>
+
+
+                                ) : isRequested || dress.isRequested || dress.status === "Pending Pickup" ? (
+
+                                <div style={{ color: "#ffc107", fontWeight: "bold", margin: "10px 0" }}>
+                                    ⏳ Pending Request
+                                </div>
+                                ) : (
+                                <div style={{ margin: "10px 0" }}>
+                                    <div style={{ color: "#28a745", fontWeight: "bold", marginBottom: "8px" }}>
+                                        ✔ Available
+                                    </div>
+                                    {isLoggedIn ? (
+                                        <Button
+                                            type="button"
+                                            onClick={() => handleRequestClick(dress)}
+                                        >
+                                            Request Dress
+                                        </Button>
+                                    ) : (
+                                        <Link to="/login" className="login-link">
+                                            Login to Request
+                                        </Link>
+                                    )}
+                                </div>
                                 )}
 
-                                {!user && (
-                                    <Link to="/login" className="login-link">
-                                        Login to Request
-                                    </Link>
-                                )}
                             </div>
                         );
                     })}

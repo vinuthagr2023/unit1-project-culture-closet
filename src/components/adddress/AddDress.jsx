@@ -4,14 +4,24 @@ import { Link, useNavigate } from "react-router-dom";
 import "./AddDress.css";
 
 
-function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
+function AddDress({ onAddDress, onDeleteDress, onUpdateDress, user, dresses }) {
+    console.log("Current user value:", user, "Type:", typeof user);
     const [showForm, setShowForm] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [loginWarning, setLoginWarning] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [deleteMessage, setDeleteMessage] = useState("");
 
-    const useDresses = dresses.filter(dress => dress.donor === user?.username);
+    const currentUsername = user?.username || user?.name || user?.email || (typeof user === 'string' ? user : null);
+    const useDresses = dresses.filter(dress =>
+        dress.donor === currentUsername ||
+        dress.donor === user?.username ||
+        dress.donor === user?.name ||
+        !dress.donor
+    );
+
+    console.log("Logged-in User Object:", user);
+    console.log("All Dresses in App:", dresses);
 
     const [formData, setFormData] = useState({
         itemName: '',
@@ -23,7 +33,7 @@ function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
         imageUrl: ""
     });
 
-   
+
     // Clear all local states when the user logs out
     useEffect(() => {
         if (user) {
@@ -80,11 +90,16 @@ function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
             console.error("onAddDress prop was not passed correctly to AddDress component.");
             return;
         }
+        const assignedDonor = user?.username || user?.name || user?.email || (typeof user === 'string' ? user : "User");
+
         const newDress = {
             ...formData,
-            id: Date.now(), // Generate unique ID
+            id: Date.now(),
+            donor: assignedDonor,
+            isRequested: false,
         };
         onAddDress(newDress);
+
 
         console.log('New dress submitted:', newDress);
         setSuccessMessage('Dress added successfully!');
@@ -105,11 +120,11 @@ function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
         setShowForm(false);
     }
 
-   const handleDeleteDress = (idToDelete) => {
+    const handleDeleteDress = (idToDelete) => {
         const itemToRemove = dresses.find((dress) => dress.id === idToDelete);
         const deletedName = itemToRemove ? itemToRemove.itemName : "Dress";
 
-         // Show deletion message and clear other status messages
+        // Show deletion message and clear other status messages
         setDeleteMessage(`"${deletedName}" deleted successfully.`);
         setSuccessMessage("");
         setErrorMessage("");
@@ -121,15 +136,15 @@ function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
 
     return (
         <div className="add-dress-container">
-            <h2> Donor Portal</h2>
+            <h2> Donate Dresses </h2>
             {loginWarning && (
                 <p>{loginWarning}
                     <Link to="/login">Click here to Login</Link>
                 </p>
             )}
-             {errorMessage && (
-                        <p className="error-banner">{errorMessage}</p>
-                    )}
+            {errorMessage && (
+                <p className="error-banner">{errorMessage}</p>
+            )}
             {successMessage && (
                 <p style={{ color: "green", fontWeight: "bold" }}>{successMessage}</p>
             )}
@@ -140,7 +155,7 @@ function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
             )}
             {!showForm && (
                 <button onClick={handleShowForm} className="add-btn">
-                    {dresses.length > 0 ? "Add another dress" : "Add a Dress"}
+                    {dresses.length > 0 ? "Add more dress" : "Add Dress"}
                 </button>
             )}
 
@@ -148,7 +163,7 @@ function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
                 <form onSubmit={handleSubmit} className="add-dress-form">
                     <h3>Fill Dress Details</h3>
                     {/* Inline Validation Error Banner */}
-                   
+
                     <label>Item Name:
                         <input type="text" name="itemName" value={formData.itemName} onChange={handleChange}
                             required />
@@ -205,33 +220,86 @@ function AddDress({ onAddDress,onDeleteDress, user ,dresses}) {
                 </form>
 
             )}
-            {dresses.length > 0 && (
+            {useDresses.length > 0 && (
                 <div className="added-dresses-section">
-                    <h3>Your Added Dresses ({dresses.length})</h3>
-                    {dresses.map((dress) => (
+                    <h3>Your Added Dresses ({useDresses.length})</h3>
+                    {useDresses.map((dress) => (
                         <div className="dress-preview-card" key={dress.id}>
                             {dress.imageUrl && (<img src={dress.imageUrl} alt={dress.itemName} />)}
 
-                            { /*<p><strong>ID:</strong> {dress.id}</p>*/}
                             <p><strong>Name:</strong> {dress.itemName}</p>
                             <p><strong>Style:</strong>{dress.traditionStyle}</p>
                             <p><strong>Gender:</strong>{dress.gender}</p>
                             <p><strong>Age:</strong>{dress.age}</p>
                             <p><strong>Size:</strong>{dress.size}</p>
-                            <button
+                            {dress.status === "Not Available" ? (
+                                <div style={{ color: "#d9534f", fontWeight: "bold", margin: "10px 0" }}>
+                                    ❌ Marked as Not Available
+                                </div>
+                            ) : dress.isRequested ? (
+                                        <div style={{ margin: "10px 0" }}>
+                                            <div style={{ color: "#d9534f", fontWeight: "bold", marginBottom: "8px" }}>
+                                                🔔 Requested by {dress.requestedBy || "a user"}!
+                                            </div>
+
+                                            {!dress.isClaimed ? (
+                                                <div style={{ display: "flex", gap: "8px" }}>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            if (typeof onUpdateDress === "function") {
+                                                                onUpdateDress(dress.id, { isClaimed: true });
+                                                            }
+                                                        }}
+                                                        style={{ backgroundColor: "#28a745", color: "white", padding: "6px 12px", border: "none", borderRadius: "4px", cursor: "pointer" }}
+                                                    >
+                                                        Accept
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            if (typeof onUpdateDress === "function") {
+                                                                // Clears the request and makes it available again
+                                                                onUpdateDress(dress.id, {
+                                                                    isRequested: false,
+                                                                    requestedBy: null,
+                                                                    isClaimed: false,
+                                                                    status: "Not Available" // Explicit status flag
+                                                                });
+                                                            }
+                                                        }}
+                                                        style={{ backgroundColor: "#d9534f", color: "white", padding: "6px 12px", border: "none", borderRadius: "4px", cursor: "pointer" }}
+                                                    >
+                                                        Not Available
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <div style={{ color: "#007bff", fontWeight: "bold", marginTop: "5px" }}>
+                                                    🎉 Donated / Claimed Successfully
+                                                </div>
+                                            )}
+                                        </div>
+                                    ) : (
+                                        <div style={{ color: "#28a745", fontWeight: "bold", margin: "10px 0" }}>
+                                            ✔ Available
+                                        </div>
+                                    )
+                                }
+                                < button
                                 className="delete-card-btn"
-                                onClick={() => handleDeleteDress(dress.id)}
+                            onClick={() => handleDeleteDress(dress.id)}
                             >
-                                Delete
-                            </button>
+                            Delete
+                        </button>
 
                         </div>
 
-                    ))}
-                </div>
-
-            )}
+            ))}
         </div>
+
+    )
+}
+        </div >
     );
 }
 

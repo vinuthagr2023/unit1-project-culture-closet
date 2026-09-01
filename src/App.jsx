@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom'
+import { useEffect } from "react";
+import { Routes, Route, Link, Navigate, useNavigate,useLocation } from 'react-router-dom'
 import './App.css'
 import LandingPage from './components/landingpage/LandingPage'
 import LoginPage from './components/login/LoginPage'
@@ -20,6 +21,13 @@ function App() {
   const [requestedDresses, setRequestedDresses] = useState([]);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  //handle on refresh , navigate to homepage
+  useEffect(() => {
+       if (!user && location.pathname !== "/") {
+      navigate("/");
+    }
+  }, []);
 
   const handleLogin = (userData) => {
     setUser(userData);
@@ -30,27 +38,49 @@ function App() {
   const handleLogout = () => {
     setUser(null);
     setRequestedDresses([]);
+    setDressList(initialDressList);
     navigate("/");
   };
   const handleAddDress = (newDress) => {
-    setDressList((prevList) => [newDress, ...prevList]);
+    const dressWithDonor = {
+      ...newDress,
+      donor: user?.username || user?.name, // <-- Ensures the current user owns it!
+      isRequested: false
+    };
+    
+    setDressList((prevList) => [dressWithDonor, ...prevList]);
   };
 
   //Handler function to append new requests
-  const handleRequestDress = (dress) => {
-    setRequestedDresses((prevRequests) => {
-      const alreadyRequested = prevRequests.some((item) => item.id === dress.id);
-      if (!alreadyRequested) {
-        return [...prevRequests, dress];
-      }
-      return prevRequests;
-    });
-  };
+  const handleRequestDress = (dressId, currentUser) => {
+  setDressList((prevDresses) =>
+      prevDresses.map((dress) =>
+        dress.id === dressId
+          ? { ...dress, isRequested: true, status: "Pending Pickup", requestedBy: currentUser?.name }
+          : dress
+      )
+    );
+
+    const targetDress = dressList.find((dress) => dress.id === dressId);
+    if (targetDress) {
+      setRequestedDresses((prevRequests) => {
+        if (prevRequests.some((item) => item.id === dressId)) return prevRequests;
+        return [...prevRequests, { ...targetDress, status: "Pending Pickup", requestedBy: currentUser?.name }];
+      });
+    }
+};
 
   const handleDeleteDress = (idToDelete) => {
     setDressList((prevDresses) => prevDresses.filter((dress) => Number(dress.id) !== Number(idToDelete)));
   };
 
+  const handleUpdateDressStatus = (id, updates) => {
+    setDressList((prevList) =>
+      prevList.map((dress) =>
+        dress.id === id ? { ...dress, ...updates } : dress
+      )
+    );
+  };
   return (
     <div className='app-container'>
       <Header
@@ -70,7 +100,12 @@ function App() {
           )
           } />
           <Route path='/recent-dresses' element={<RecentDresses dresses={dressList} />} />
-          <Route path="/add-dress" element={<AddDress onAddDress={handleAddDress} user={user} onDeleteDress={handleDeleteDress} dresses={dressList} />} />
+          <Route path="/add-dress" element={<AddDress
+           onAddDress={handleAddDress} 
+          user={user} 
+          onDeleteDress={handleDeleteDress} 
+          dresses={dressList} 
+          onUpdateDress={handleUpdateDressStatus} />} />
           <Route path="/browse-dresses"
             element={<BrowseDresses dresses={dressList} user={user}
               requestedDresses={requestedDresses}
@@ -78,7 +113,7 @@ function App() {
             />} />
           <Route
             path="/my-requests"
-            element={<MyRequests requestedDresses={requestedDresses} user={user} />}
+            element={<MyRequests requestedDresses={requestedDresses} user={user} dresses={dressList} />}
           />
         </Routes>
       </main>

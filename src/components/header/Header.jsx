@@ -10,7 +10,7 @@ function Header({ user, onLogout }) {
             <div className="header-brand">
                 <h1 className="title">Culture Closet</h1>
                 <h2 className="logo">Heritage kids</h2>
-            </div>
+            
 
             <nav className="nav">
                 <div className="nav-left">
@@ -39,8 +39,9 @@ function Header({ user, onLogout }) {
                     <button type="button" onClick={onLogout}>Logout</button>
                 </div>
             )}
-                </div>
+         </div>
             </nav>
+              </div>
         </header>
 
     );

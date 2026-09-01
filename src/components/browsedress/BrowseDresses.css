@@ -51,6 +51,8 @@
     color: #007bff;
     text-decoration: none;
     font-weight: 600;
+    font-size: 30px;
+    text-decoration: underline;
 }
 
 /* Filter Controls */
@@ -107,6 +109,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
+    justify-content: space-between; /* Pushes the button/links to the bottom evenly */
+    height: 100%; /* Forces every card to fill its grid cell completely */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -134,24 +138,25 @@
 }
 
 .dresses-container h3 {
-    font-size: 1.25rem;
-    color: #190bdf;
+    font-size: 28px;
+    color: #e96817;
     margin: 15px 15px 5px 15px;
 }
 
 .dresses-container p {
-    font-size: 0.95rem;
-    color: #e4520e;
+    font-size: 20px;
+    color:black;
     margin: 4px 15px;
 }
 
 .dresses-container p strong {
-    color: #8b0881;
+    color:   #410cd4;
+    font-size: 20px;
 }
 
 .dresses-container .role-note {
     font-size: 0.85rem;
-    color: #6c757d;
+    color: #410cd4;
     font-style: italic;
     margin: 15px;
     text-align: center;
@@ -224,8 +229,7 @@
         gap: 15px;
     }
     
-    /* Make the image take up more of the card on smaller screens 
-       since 50% might look too narrow on a tablet */
+ 
     .dresses-container img {
         width: 100%; 
         height: 250px;

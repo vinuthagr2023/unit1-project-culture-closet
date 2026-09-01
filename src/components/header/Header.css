@@ -1,53 +1,49 @@
 
-.main-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 32px; /* Reduced vertical padding from 16px to 6px */
-  background-color: #eeea15;
-  border-bottom: 2px solid #e9ecef; 
-  flex-wrap: wrap;
-  gap: 0px;
-  
-}
-
-
 .header-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
   width: 100%;
-  height: auto;
-  text-align: center;
+  box-sizing: border-box;
+  background-color: rgba(169, 233, 67, 0.911);
+ border: 4px solid green;
+  border-radius: 0; 
+ padding: 4px 20px;
+  margin: 0;
 }
+
 
 .header-brand .title {
-   width: 100%;
-  box-sizing: border-box;
   text-align: center; 
-  background-color: rgb(233, 98, 35);
-  border: 5px solid green;
-  border-radius: 0; 
-  padding: 20px;
+  background-color: transparent; 
+  border: none;                  
+  padding: 0;
   margin: 0;
-  color: green;
-  font-size: 50px;
-  margin-top: 0;
+  color: rgb(198, 69, 10);
+  font-size: 40px;
 }
 
+
 .header-brand .logo {
-  font-size:larger;
+  font-size: 13px;
   font-weight: 600;
-  color: #d14809;
-  margin: 10px 0 0 0;
+  color: #e1660e; 
+  margin: 2px 0 0 0;
   letter-spacing: 1px;
   text-decoration: underline;
+  text-align: center;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  justify-content: left; 
-  gap: 10px;
-  width: 100%;           
-  margin-top: 0;
+  justify-content: space-between; 
+  gap: 15px;
+  width: 100%;          
+  margin-top: 10px; 
+  margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 .nav-left {
   display: flex;
@@ -60,7 +56,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-left: auto; /* Pushes everything to the far right */
+  margin-left: auto; 
 }
 
 .nav a {
