@@ -63,7 +63,7 @@ function MyRequests({ requestedDresses = [], user, dresses = [] }) {
                                     🔒 Claimed / Not Available
                                 </span>
                             ) : (
-                                <span style={{ color: "#ffc107", fontWeight: "bold" }}>
+                                <span >
                                     Pending Pickup
                                 </span>
                             )}
