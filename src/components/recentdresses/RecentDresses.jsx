@@ -2,17 +2,20 @@ import { useState } from "react";
 import DressCard from "../dresscard/DressCard";
 import "./RecentDresses.css";
 
-function RecentDresses({ dresses }) {
+function RecentDresses({ dresses =[]}) {
+    // Take only the first 2 items from the array
+   const recentItems = dresses.slice(0, 2);
+
     return (
         <div className="recent-container">
             <h2> Recent dresses </h2>
             <section className="recentItem">
               
-                {dresses.length === 0 ? (
+                {recentItems.length === 0 ? (
                     <p className="no-dresses-msg">No dresses available yet.</p>
                 ) : (
                     <div className="previewGrid">
-                        {dresses.map((item) => (
+                        {recentItems.map((item) => (
                             <DressCard key={item.id} dress={item} />
                         ))}
                     </div>

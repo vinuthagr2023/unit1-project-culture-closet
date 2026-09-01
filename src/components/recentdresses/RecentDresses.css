@@ -9,11 +9,12 @@
 }
 
 .recent-container h2 {
-    font-size: 2rem;
-    color: #2c3e50;
+    font-size: 30px;
+    color: orangered;
     margin-bottom: 20px;
     text-align: center;
     font-weight: 700;
+    text-decoration: underline;
 }
 
 .recentItem {

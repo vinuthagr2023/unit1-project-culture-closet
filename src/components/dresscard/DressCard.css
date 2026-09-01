@@ -37,21 +37,22 @@
 }
 
 .item-card h4 {
-    font-size: 1.2rem;
-    color: #343a40;
+    font-size: 25px;
+    color: #e6730f;
     margin: 15px 15px 8px 15px;
     font-weight: 600;
 }
 
 .item-card p {
-    font-size: 0.95rem;
-    color: #495057;
+    font-size: 20px;
+    color: black;
     margin: 4px 15px;
     line-height: 1.4;
 }
 
 .item-card p strong {
-    color: #212529;
+    color: #0859a9;
+    font-size: 20px;
 }
 
 .item-card p:last-of-type {

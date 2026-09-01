@@ -26,7 +26,7 @@ const initialDressList = [
     },
      {
         id:3,
-        itemName:"Cotton Lehenga",
+        itemName:"Cotton Sherwani",
         traditionStyle:"ndian" ,
         gender:"girl" ,
         age:"0-2 years" ,

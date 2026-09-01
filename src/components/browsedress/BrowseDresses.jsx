@@ -4,8 +4,7 @@ import Button from "../button/Button";
 import "./BrowseDresses.css";
 
 function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDress }) {
-    const isUserLoggedIn = user?.role === "user";
-    const isDonorLoggedIn = user?.role === "donor";
+    const isLoggedIn = Boolean(user);
 
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGender, setSelectedGender] = useState("all");
@@ -33,7 +32,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
 
         // Call parent handler if passed
         if (typeof onRequestDress === "function") {
-            onRequestDress(dress);
+            onRequestDress(dress.id, user);
         }
 
         setSuccessMessage(`Request sent for: ${dress.itemName || dress.name || "this dress"}`);
@@ -62,16 +61,16 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
 
     return (
         <div className="browse-container">
-            <h2> Browse Cultural Outfits </h2>
+            <h1> Browse Cultural Outfits </h1>
             {/* Render Login Warning Banner */}
             {!user && loginWarning && (
                 <div className="warning-banner" >
                     <span>{loginWarning} </span>
                     <Link
-                        to="/user-login"
+                        to="/login"
                         style={{ fontWeight: "bold", color: "#721c24", textDecoration: "underline" }}
                     >
-                        Click here for User Login
+                        Click here for Login
                     </Link>
                 </div>
             )}
@@ -83,7 +82,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                 </div>
             )}
 
-            {user?.role === "user" && (
+            {user && (
                 <div className="req-link" style={{ marginBottom: "15px" }}>
                     <Link to="/my-requests">
                         View My Requested dresses
@@ -117,7 +116,7 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
             </div>
 
             {filteredDresses.length === 0 ? (
-                <p>No dresses match your search criteria.</p>
+                <h2>No dresses match your search criteria.</h2>
             ) : (
                 <div className="dresses-container">
                     {filteredDresses.map((dress, index) => {
@@ -140,23 +139,41 @@ function BrowseDresses({ dresses = [], user, requestedDresses = [], onRequestDre
                                 <p> <strong>Age:</strong>{dress.age}</p>
                                 <p> <strong>Size:</strong>{dress.size}</p>
                                 <p> <strong>Condition:</strong>{dress.condition}</p>
-                                {isUserLoggedIn && (
-                                    <Button
-                                        type="button"
-                                        onClick={() => handleRequestClick(dress)}
-                                        disabled={isRequested || dress.status === "Pending Pickup"}
-                                    >
-                                        {isRequested || dress.status === "Pending Pickup"
-                                            ? "Requested"
-                                            : "Request Dress"}
-                                    </Button>
+                                {dress.status === "Not Available" ? (
+                                    <div style={{ color: "#d9534f", fontWeight: "bold", margin: "10px 0" }}>
+                                        ❌ Not Available
+                                    </div>
+                                ) : dress.isClaimed ? (
+                                <div style={{ color: "#d9534f", fontWeight: "bold", margin: "10px 0" }}>
+                                    🔒 Claimed / Not Available
+                                </div>
+
+
+                                ) : isRequested || dress.isRequested || dress.status === "Pending Pickup" ? (
+
+                                <div style={{ color: "#ffc107", fontWeight: "bold", margin: "10px 0" }}>
+                                    ⏳ Pending Request
+                                </div>
+                                ) : (
+                                <div style={{ margin: "10px 0" }}>
+                                    <div style={{ color: "#28a745", fontWeight: "bold", marginBottom: "8px" }}>
+                                        ✔ Available
+                                    </div>
+                                    {isLoggedIn ? (
+                                        <Button
+                                            type="button"
+                                            onClick={() => handleRequestClick(dress)}
+                                        >
+                                            Request Dress
+                                        </Button>
+                                    ) : (
+                                        <Link to="/login" className="login-link">
+                                            Login to Request
+                                        </Link>
+                                    )}
+                                </div>
                                 )}
 
-                                {!user && (
-                                    <Link to="/user-login" className="login-link">
-                                        Login to Request
-                                    </Link>
-                                )}
                             </div>
                         );
                     })}
