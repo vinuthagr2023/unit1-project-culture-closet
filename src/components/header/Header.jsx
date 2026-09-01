@@ -9,8 +9,7 @@ function Header({ user, onLogout }) {
         <header className="main-header">
             <div className="header-brand">
                 <h1 className="title">Culture Closet</h1>
-                <h2 className="logo">Heritage kids</h2>
-            
+                <h2 className="logo">Heritage kids</h2>            
 
             <nav className="nav">
                 <div className="nav-left">

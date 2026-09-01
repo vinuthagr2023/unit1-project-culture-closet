@@ -22,6 +22,23 @@ function LoginPage({ onLogin }) {
         e.preventDefault();
         const name = formData.name.trim();
         const email = formData.email.trim();
+        // Username Validation: Check if empty or too short
+        if (name.length < 2) {
+            alert("Please enter a valid user name (at least 2 characters long).");
+            return;
+        }
+
+        // Username Validation: Check if it starts with a number
+        if (/^\d/.test(name)) {
+            alert("Username cannot start with a number.");
+            return;
+        }
+
+        // Username Validation: Check if the username consists of numbers only
+        if (/^\d+$/.test(name)) {
+            alert("Username cannot consist of numbers only.");
+            return;
+        }
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(email)) {
             alert("Please enter a valid email address containing '@' and a domain (e.g. name@example.com).");

@@ -6,14 +6,10 @@ function LandingPage({ isLoggedIn = false, username = "" }) {
 
       return (
         <div>
-           
-
             <section>
                 <div className="slogan">
                     <h2>----- Share your heritage ------ </h2>
-
                 </div>
-
 
                 <div className="categeries">
                     <Link to={isLoggedIn ? "/add-dress" : "/login"} className="donate">

@@ -83,6 +83,22 @@ function AddDress({ onAddDress, onDeleteDress, onUpdateDress, user, dresses }) {
             setErrorMessage("Please fill out all fields and select a photo before submitting.");
             return;
         }
+        const itemNameTrimmed = formData.itemName.trim();
+        const styleTrimmed = formData.traditionStyle.trim();
+        const textOnlyPattern = /^[a-zA-Z\s]+$/;
+
+        // Validate Item Name (no numbers)
+        if (!textOnlyPattern.test(itemNameTrimmed)) {
+            setErrorMessage("Item Name should only contain letters and spaces (no numbers).");
+            return;
+        }
+
+        // Validate Culture Style (no numbers)
+        if (!textOnlyPattern.test(styleTrimmed)) {
+            setErrorMessage("Culture Style should only contain letters and spaces (no numbers).");
+            return;
+        }
+
         if (typeof onAddDress !== "function") {
             console.error("onAddDress prop was not passed correctly to AddDress component.");
             return;
@@ -91,14 +107,14 @@ function AddDress({ onAddDress, onDeleteDress, onUpdateDress, user, dresses }) {
 
         const newDress = {
             ...formData,
+            itemName: itemNameTrimmed,
+            traditionStyle: styleTrimmed,
             id: Date.now(),
             donor: assignedDonor,
             isRequested: false,
         };
         onAddDress(newDress);
 
-
-        console.log('New dress submitted:', newDress);
         setSuccessMessage('Dress added successfully!');
         setErrorMessage("");
         setDeleteMessage("");
