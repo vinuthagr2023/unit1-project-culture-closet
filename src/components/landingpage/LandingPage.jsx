@@ -22,16 +22,15 @@ function LandingPage({ isLoggedIn = false, username = "" }) {
 
                 <div className="images">
 
-                    <img src="/closet_dress1.jpg" alt="closet_dress" />
-                    <img src="/closet.jpg" alt="closet" />
-                    <img src="/closet_dress2.jpg" alt="closet_dress" />
+                    <img src="/public/closet_dress1.jpg" alt="closet_dress" />
+                    <img src="/public/closet.jpg" alt="closet" />
+                    <img src="/public/closet_dress2.jpg" alt="closet_dress" />
 
                 </div><br></br>
             </section>
             <div>
                 <p className="connect-family">Connect families to pass down and share traditional children cloths</p><br />
             </div>
-
 
         </div>
 
