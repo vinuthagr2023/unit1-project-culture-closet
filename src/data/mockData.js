@@ -10,7 +10,7 @@ const initialDressList = [
         age:"6-8 years" ,
         size:"M",
         condition:"gently used",
-        imageUrl:"/kids-dress-image6.jpg"
+        imageUrl:"kids-dress-image6.jpg"
 
     },
      {
@@ -21,7 +21,7 @@ const initialDressList = [
         age:"3-5 years" ,
         size:"S",
         condition:"like new",
-        imageUrl:"/kids-dress-image4.jpg"
+        imageUrl:"kids-dress-image4.jpg"
 
     },
      {
@@ -32,7 +32,7 @@ const initialDressList = [
         age:"0-2 years" ,
         size:"L",
         condition:"good",
-        imageUrl:"/kids-dress-image3.jpg"
+        imageUrl:"kids-dress-image3.jpg"
 
     }
 
